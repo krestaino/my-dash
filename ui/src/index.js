@@ -2,6 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 
+import Seafile from "./components/Seafile.js";
+import Plex from "./components/Plex.js";
+import Unifi from "./components/Unifi.js";
+import NetdataDo from "./components/NetdataDo.js";
+import NetdataHome from "./components/NetdataHome.js";
+import UptimeRobot from "./components/UptimeRobot.js";
+
 class App extends React.Component {
   state = {
     seafile: null,
@@ -43,28 +50,22 @@ class App extends React.Component {
   }
 
   render() {
+    const {
+      seafile,
+      plex,
+      unifi,
+      netdataDo,
+      netdataHome,
+      uptimeRobot
+    } = this.state;
     return (
       <div className="App">
-        <ul>
-          <li>
-            <pre>{JSON.stringify(this.state.seafile)}</pre>
-          </li>
-          <li>
-            <pre>{JSON.stringify(this.state.plex)}</pre>
-          </li>
-          <li>
-            <pre>{JSON.stringify(this.state.unifi)}</pre>
-          </li>
-          <li>
-            <pre>{JSON.stringify(this.state.netdataDo)}</pre>
-          </li>
-          <li>
-            <pre>{JSON.stringify(this.state.netdataHome)}</pre>
-          </li>
-          <li>
-            <pre>{JSON.stringify(this.state.uptimeRobot)}</pre>
-          </li>
-        </ul>
+        <Seafile seafile={seafile} />
+        <Plex plex={plex} />
+        <Unifi unifi={unifi} />
+        <NetdataDo netdataDo={netdataDo} />
+        <NetdataHome netdataHome={netdataHome} />
+        <UptimeRobot uptimeRobot={uptimeRobot} />
       </div>
     );
   }
