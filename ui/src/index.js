@@ -26,7 +26,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetch();
     axios.all(this.fetch()).then(
       axios.spread(
         (seafile, plex, unifi, netdataDo, netdataHome, uptimeRobot) => {
