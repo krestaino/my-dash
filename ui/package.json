@@ -7,13 +7,15 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "tailwindcss": "^1.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn build:css",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "npx tailwind build src/styles.css -o public/styles.css && npx uglifycss public/styles.css > public/styles.min.css && npx del-cli public/styles.css"
   },
   "eslintConfig": {
     "extends": "react-app"
