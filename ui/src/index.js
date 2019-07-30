@@ -12,52 +12,35 @@ class App extends React.Component {
     uptimeRobot: null
   };
 
-  getSeafile() {
-    return axios.get("//localhost:4000/seafile");
-  }
+  fetch() {
+    const endpoints = [
+      "//localhost:4000/seafile",
+      "//localhost:4000/plex",
+      "//localhost:4000/unifi",
+      "//localhost:4000/netdata-do",
+      "//localhost:4000/netdata-home",
+      "//localhost:4000/uptime-robot"
+    ];
 
-  getPlex() {
-    return axios.get("//localhost:4000/plex");
-  }
-
-  getUnifi() {
-    return axios.get("//localhost:4000/unifi");
-  }
-
-  getNetdataDo() {
-    return axios.get("//localhost:4000/netdata-do");
-  }
-
-  getNetdataHome() {
-    return axios.get("//localhost:4000/netdata-home");
-  }
-
-  getUptimeRobot() {
-    return axios.get("//localhost:4000/uptime-robot");
+    return endpoints.map(endpoint => axios.get(endpoint));
   }
 
   componentDidMount() {
-    axios
-      .all([
-        this.getSeafile(),
-        this.getPlex(),
-        this.getUnifi(),
-        this.getNetdataDo(),
-        this.getNetdataHome(),
-        this.getUptimeRobot()
-      ])
-      .then(
-        axios.spread(
-          (seafile, plex, unifi, netdataDo, netdataHome, uptimeRobot) => {
-            this.setState({ seafile: seafile.data });
-            this.setState({ plex: plex.data });
-            this.setState({ unifi: unifi.data });
-            this.setState({ netdataDo: netdataDo.data });
-            this.setState({ netdataHome: netdataHome.data });
-            this.setState({ uptimeRobot: uptimeRobot.data });
-          }
-        )
-      );
+    this.fetch();
+    axios.all(this.fetch()).then(
+      axios.spread(
+        (seafile, plex, unifi, netdataDo, netdataHome, uptimeRobot) => {
+          this.setState({
+            seafile: seafile.data,
+            plex: plex.data,
+            unifi: unifi.data,
+            netdataDo: netdataDo.data,
+            netdataHome: netdataHome.data,
+            uptimeRobot: uptimeRobot.data
+          });
+        }
+      )
+    );
   }
 
   render() {
