@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+.loader {
+  margin: 2rem auto;
+  position: relative;
+  border-top: 0.25rem solid rgba(0, 0, 0, 0.2);
+  border-right: 0.25rem solid rgba(0, 0, 0, 0.2);
+  border-bottom: 0.25rem solid rgba(0, 0, 0, 0.2);
+  border-left: 0.25rem solid rgba(0, 0, 0, 0.7);
+  transform: translateZ(0);
+  animation: spin 1.1s infinite linear;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
