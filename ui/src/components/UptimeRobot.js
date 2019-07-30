@@ -19,12 +19,12 @@ export default class UptimeRobot extends Component {
     const { uptimeRobot } = this.props;
 
     return (
-      <div className="p-2 relative inline-block">
-        <h2 className="text-xl">Uptime Robot</h2>
+      <div className="w-1/5 mx-4">
+        <h2>Uptime Robot</h2>
         {uptimeRobot === null ? (
           <Loading />
         ) : (
-          <ul>
+          <ul className="box">
             {uptimeRobot.monitors.map(monitor => {
               return (
                 <li className="flex items-center" key={monitor.friendly_name}>

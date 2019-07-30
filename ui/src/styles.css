@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.box {
+  @apply p-4 relative inline-block border shadow-md rounded w-full overflow-hidden;
+}
+
+h2 {
+  @apply mb-2 text-center uppercase text-gray-600 text-xs;
+}
+
 .loader,
 .loader:after {
   border-radius: 50%;

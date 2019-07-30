@@ -59,13 +59,13 @@ class App extends React.Component {
       uptimeRobot
     } = this.state;
     return (
-      <div className="text-gray-800">
+      <div className="text-gray-800 my-4 flex max-w-6xl">
         <UptimeRobot uptimeRobot={uptimeRobot} />
-        {/* <Seafile seafile={seafile} />
         <Plex plex={plex} />
-        <Unifi unifi={unifi} />
-        <NetdataDo netdataDo={netdataDo} />
-        <NetdataHome netdataHome={netdataHome} /> */}
+        {/* <Seafile seafile={seafile} /> */}
+        {/* <Unifi unifi={unifi} /> */}
+        {/* <NetdataDo netdataDo={netdataDo} /> */}
+        {/* <NetdataHome netdataHome={netdataHome} /> */}
       </div>
     );
   }
