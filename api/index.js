@@ -82,4 +82,17 @@ app.get("/netdata-home", ({ res }) => {
     });
 });
 
+app.get("/uptime-robot", ({ res }) => {
+  axios
+    .post("https://api.uptimerobot.com/v2/getMonitors", {
+      api_key: process.env.UPTIME_ROBOT_KEY
+    })
+    .then(response => {
+      res.send(response.data);
+    })
+    .catch(error => {
+      res.send(error);
+    });
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}!`));
