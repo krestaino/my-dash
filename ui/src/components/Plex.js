@@ -74,7 +74,7 @@ export default class Plex extends Component {
                         </div>
                       </div>
                       <div
-                        className="absolute bg-blue-500 h-1 inset-x-0 top-0"
+                        className="absolute bg-blue-500 h-1 inset-x-0 top-0 -mt-1"
                         style={{
                           width:
                             (stream.viewOffset / stream.duration) * 100 + "%"
