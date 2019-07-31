@@ -33,7 +33,7 @@ export default class Plex extends Component {
     const { plex } = this.props;
 
     return (
-      <div className="w-1/5 px-4">
+      <div className="lg:w-1/5 px-4 mb-8">
         <h2>Plex</h2>
         {plex === null ? (
           <Loading />

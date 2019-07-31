@@ -12,7 +12,7 @@ export default class Seafile extends Component {
   render() {
     const { seafile } = this.props;
     return (
-      <div className="w-1/5 px-4">
+      <div className="lg:w-1/5 px-4">
         <h2>Seafile</h2>
         {seafile === null ? (
           <Loading />
@@ -35,7 +35,9 @@ export default class Seafile extends Component {
                 </div>
                 <div className="text-gray-600 text-xs">
                   <span>Last modified: </span>
-                  <span>{distanceInWordsToNow(new Date(drive.mtime * 1000))}</span>
+                  <span>
+                    {distanceInWordsToNow(new Date(drive.mtime * 1000))}
+                  </span>
                   <span> ago</span>
                 </div>
               </li>

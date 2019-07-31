@@ -11,7 +11,7 @@ export default class Unifi extends Component {
   render() {
     const { unifi } = this.props;
     return (
-      <div className="w-1/5 px-4">
+      <div className="lg:w-1/5 px-4">
         <h2>Unifi</h2>
         {unifi === null ? (
           <Loading />
