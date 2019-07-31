@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { distanceInWordsToNow } from "date-fns";
 
 import Loading from "./Loading.js";
 
