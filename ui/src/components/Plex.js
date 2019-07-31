@@ -39,10 +39,10 @@ export default class Plex extends Component {
           <Loading />
         ) : (
           <ul>
-            {plex.MediaContainer.size > 0 &&
-              plex.MediaContainer.Metadata.map(stream => {
+            {plex.MediaContainer.size > 0 ? (
+              plex.MediaContainer.Metadata.map((stream, index) => {
                 return (
-                  <li className="box mb-8" key={stream.TranscodeSession.key}>
+                  <li className="box mb-8" key={index}>
                     {stream.grandparentTitle ? (
                       <div>{stream.grandparentTitle}</div>
                     ) : (
@@ -73,16 +73,21 @@ export default class Plex extends Component {
                           {stream.Player.device} · {stream.Player.platform}
                         </div>
                       </div>
-                      <div
-                        className="absolute bg-blue-500 h-1 inset-x-0 top-0"
-                        style={{
-                          width: stream.TranscodeSession.progress + "%"
-                        }}
-                      />
+                      {stream.TranscodeSession && (
+                        <div
+                          className="absolute bg-blue-500 h-1 inset-x-0 top-0"
+                          style={{
+                            width: stream.TranscodeSession.progress + "%"
+                          }}
+                        />
+                      )}
                     </div>
                   </li>
                 );
-              })}
+              })
+            ) : (
+              <div className="box text-center">No active streams</div>
+            )}
           </ul>
         )}
       </div>
