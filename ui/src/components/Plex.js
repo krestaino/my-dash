@@ -61,7 +61,7 @@ export default class Plex extends Component {
                     <div className="text-gray-600 text-sm">
                       {this.displayTime(stream.duration, "H mm")}
                     </div>
-                    <div className="flex items-center mt-4 bg-gray-200 -m-4 p-4 relative">
+                    <div className="flex items-center mt-4 -m-4 p-4 relative border-t">
                       <img
                         alt={stream.User.title}
                         className="rounded-full h-8 w-8 mr-4"
