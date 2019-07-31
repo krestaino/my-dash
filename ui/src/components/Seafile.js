@@ -12,7 +12,7 @@ export default class Seafile extends Component {
   render() {
     const { seafile } = this.props;
     return (
-      <div className="w-1/5 mx-4">
+      <div className="w-1/5 px-4">
         <h2>Seafile</h2>
         {seafile === null ? (
           <Loading />

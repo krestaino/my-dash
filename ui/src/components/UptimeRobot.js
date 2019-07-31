@@ -15,7 +15,7 @@ export default class UptimeRobot extends Component {
     const { uptimeRobot } = this.props;
 
     return (
-      <div className="w-1/5 mx-4">
+      <div className="w-1/5 px-4">
         <h2>Uptime Robot</h2>
         {uptimeRobot === null ? (
           <Loading />
