@@ -18,7 +18,7 @@ export default class Seafile extends Component {
         ) : (
           seafile.map(drive => {
             return (
-              <li className="box mb-8 justify-between flex">
+              <li className="box mb-8 justify-between flex" key={drive.id}>
                 <span>{drive.name}</span>
                 <span className="text-gray-600 text-sm">
                   {drive.size_formatted}
