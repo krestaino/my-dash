@@ -38,6 +38,7 @@ export default class UptimeRobot extends Component {
                     {monitor.status === 2 ? <IconSuccess /> : <IconError />}
                   </div>
                   <a
+                    className="hover:underline"
                     href={this.formatUrl(monitor.url)}
                     rel="noopener noreferrer"
                     target="_blank"
