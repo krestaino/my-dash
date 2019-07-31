@@ -73,14 +73,13 @@ export default class Plex extends Component {
                           {stream.Player.device} · {stream.Player.platform}
                         </div>
                       </div>
-                      {stream.TranscodeSession && (
-                        <div
-                          className="absolute bg-blue-500 h-1 inset-x-0 top-0"
-                          style={{
-                            width: stream.TranscodeSession.progress + "%"
-                          }}
-                        />
-                      )}
+                      <div
+                        className="absolute bg-blue-500 h-1 inset-x-0 top-0"
+                        style={{
+                          width:
+                            (stream.viewOffset / stream.duration) * 100 + "%"
+                        }}
+                      />
                     </div>
                   </li>
                 );
