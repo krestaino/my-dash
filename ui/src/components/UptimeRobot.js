@@ -8,7 +8,7 @@ import { ReactComponent as IconSuccess } from "../assets/check-circle-solid.svg"
 
 export default class UptimeRobot extends Component {
   static propTypes = {
-    uptimeRobot: PropTypes.object
+    uptimeRobot: PropTypes.array
   };
 
   render() {

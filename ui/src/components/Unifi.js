@@ -6,7 +6,7 @@ import Loading from "./Loading.js";
 
 export default class Unifi extends Component {
   static propTypes = {
-    unifi: PropTypes.array
+    unifi: PropTypes.object
   };
 
   render() {
