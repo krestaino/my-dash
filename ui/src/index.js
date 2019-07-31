@@ -65,7 +65,7 @@ class App extends React.Component {
       uptimeRobot
     } = this.state;
     return (
-      <div className="text-gray-800 my-4 flex max-w-6xl">
+      <div className="container text-gray-800 py-8 flex max-w-6xl mx-auto">
         <UptimeRobot uptimeRobot={uptimeRobot} />
         <Plex plex={plex} />
         <Seafile seafile={seafile} />
