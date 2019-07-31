@@ -19,7 +19,14 @@ export default class Seafile extends Component {
           seafile.map(drive => {
             return (
               <li className="box mb-8 justify-between flex" key={drive.id}>
-                <span>{drive.name}</span>
+                <a
+                  className="hover:underline"
+                  href={`https://seafile.kmr.io/library/${drive.id}`}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {drive.name}
+                </a>
                 <span className="text-gray-600 text-sm">
                   {drive.size_formatted}
                 </span>
