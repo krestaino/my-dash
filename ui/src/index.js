@@ -29,11 +29,7 @@ class App extends React.Component {
       "//localhost:4000/uptime-robot"
     ];
 
-    return endpoints.map(endpoint => axios.get(endpoint));
-  }
-
-  componentDidMount() {
-    axios.all(this.fetch()).then(
+    axios.all(endpoints.map(endpoint => axios.get(endpoint))).then(
       axios.spread(
         (seafile, plex, unifi, netdataDo, netdataHome, uptimeRobot) => {
           this.setState({
@@ -47,6 +43,16 @@ class App extends React.Component {
         }
       )
     );
+  }
+
+  componentDidMount() {
+    this.fetch();
+
+    if (process.env.NODE_ENV !== "development") {
+      setInterval(() => {
+        this.fetch();
+      }, 5000);
+    }
   }
 
   render() {
