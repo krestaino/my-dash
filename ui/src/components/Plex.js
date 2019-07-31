@@ -17,7 +17,7 @@ export default class Plex extends Component {
     let hours = "";
 
     if (parseInt(minutes) > 59) {
-      hours = normalizeTime(Math.floor(parseInt(minutes) / 60).toString());
+      hours = Math.floor(parseInt(minutes) / 60).toString();
       minutes = normalizeTime(
         (parseInt(minutes) - parseInt(hours) * 60).toString()
       );
