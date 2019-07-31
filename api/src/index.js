@@ -45,7 +45,7 @@ app.get("/unifi", ({ res }) => {
       strict: true
     })
     .then(response => {
-      axios(`${process.env.UNIFI_URL}/api/self/sites`, {
+      axios(`${process.env.UNIFI_URL}/api/s/default/stat/health`, {
         headers: {
           cookie: response.headers["set-cookie"].toString()
         }
@@ -88,7 +88,15 @@ app.get("/uptime-robot", ({ res }) => {
       api_key: process.env.UPTIME_ROBOT_KEY
     })
     .then(response => {
-      res.send(response.data);
+      let client = [];
+
+      response.data.monitors.map(monitor => {
+        const { id, friendly_name, status } = monitor;
+
+        client.push({ id, friendly_name, status });
+      });
+
+      res.send(client);
     })
     .catch(error => {
       res.send(error);

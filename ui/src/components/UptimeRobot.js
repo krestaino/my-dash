@@ -11,10 +11,6 @@ export default class UptimeRobot extends Component {
     uptimeRobot: PropTypes.object
   };
 
-  formatUrl(url) {
-    return url.startsWith("http") ? url : "//" + url;
-  }
-
   render() {
     const { uptimeRobot } = this.props;
 
@@ -25,7 +21,7 @@ export default class UptimeRobot extends Component {
           <Loading />
         ) : (
           <ul className="box">
-            {uptimeRobot.monitors.map(monitor => {
+            {uptimeRobot.map(monitor => {
               return (
                 <li className="flex items-center" key={monitor.friendly_name}>
                   <div
@@ -39,7 +35,7 @@ export default class UptimeRobot extends Component {
                   </div>
                   <a
                     className="hover:underline"
-                    href={this.formatUrl(monitor.url)}
+                    href={`https://uptimerobot.com/dashboard#${monitor.id}`}
                     rel="noopener noreferrer"
                     target="_blank"
                   >
