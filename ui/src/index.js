@@ -5,8 +5,7 @@ import axios from "axios";
 import Seafile from "./components/Seafile.js";
 import Plex from "./components/Plex.js";
 import Unifi from "./components/Unifi.js";
-import NetdataDo from "./components/NetdataDo.js";
-import NetdataHome from "./components/NetdataHome.js";
+import Netdata from "./components/Netdata.js";
 import UptimeRobot from "./components/UptimeRobot.js";
 
 class App extends React.Component {
@@ -70,8 +69,7 @@ class App extends React.Component {
         <Unifi unifi={unifi} />
         <Seafile seafile={seafile} />
         <Plex plex={plex} />
-        {/* <NetdataDo netdataDo={netdataDo} /> */}
-        {/* <NetdataHome netdataHome={netdataHome} /> */}
+        <Netdata netdataDo={netdataDo} netdataHome={netdataHome} />
       </div>
     );
   }

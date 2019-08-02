@@ -63,7 +63,7 @@ app.get("/unifi", ({ res }) => {
 });
 
 app.get("/netdata-do", ({ res }) => {
-  axios(`${process.env.NETDATA_DO_URL}/api/v1/alarms`)
+  axios(`${process.env.NETDATA_DO_URL}/api/v1/info`)
     .then(response => {
       res.send(response.data);
     })
@@ -73,7 +73,7 @@ app.get("/netdata-do", ({ res }) => {
 });
 
 app.get("/netdata-home", ({ res }) => {
-  axios(`${process.env.NETDATA_HOME_URL}/api/v1/alarms`)
+  axios(`${process.env.NETDATA_HOME_URL}/api/v1/info`)
     .then(response => {
       res.send(response.data);
     })
