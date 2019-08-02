@@ -23,21 +23,20 @@ export default class Unifi extends Component {
                 <li className="box mb-8 flex flex-col" key={system.subsystem}>
                   <div className="justify-between flex w-full">
                     <span className="uppercase">{system.subsystem}</span>
-                    {system.num_user && (
-                      <span className="text-gray-600 text-sm">
-                        Clients: {system.num_user}
-                      </span>
-                    )}
-                    {system.remote_user_num_active !== undefined && (
-                      <span className="text-gray-600 text-sm">
-                        Clients: {system.remote_user_num_active}
-                      </span>
-                    )}
-                    {system.wan_ip && (
-                      <span className="text-gray-600 text-sm" style={blur}>
-                        {system.wan_ip}
-                      </span>
-                    )}
+                    <span
+                      className="text-gray-600 text-sm self-end"
+                      style={blur}
+                    >
+                      {system.num_user && (
+                        <span>Clients: {system.num_user}</span>
+                      )}
+                      {system.remote_user_num_active !== undefined && (
+                        <span>Clients: {system.remote_user_num_active}</span>
+                      )}
+                      {system.wan_ip && (
+                        <span style={blur}>{system.wan_ip}</span>
+                      )}
+                    </span>
                   </div>
                   <div className="text-gray-600 text-xs">
                     {system["tx_bytes-r"] && (
@@ -50,16 +49,19 @@ export default class Unifi extends Component {
                         Rx: {system["rx_bytes-r"].toLocaleString()} bytes
                       </div>
                     )}
-                    {system.remote_user_tx_bytes !== undefined && (
-                      <div>
-                        Tx: {system.remote_user_tx_bytes.toLocaleString()} bytes
-                      </div>
-                    )}
-                    {system.remote_user_rx_bytes !== undefined && (
-                      <div>
-                        Rx: {system.remote_user_rx_bytes.toLocaleString()} bytes
-                      </div>
-                    )}
+                    {system.remote_user_num_active !== 0 &&
+                      system.remote_user_tx_bytes !== undefined && (
+                        <div>
+                          Tx: {system.remote_user_tx_bytes.toLocaleString()}{" "}
+                          bytes
+                        </div>
+                      ) &&
+                      system.remote_user_rx_bytes !== undefined && (
+                        <div>
+                          Rx: {system.remote_user_rx_bytes.toLocaleString()}{" "}
+                          bytes
+                        </div>
+                      )}
                   </div>
                 </li>
               );
