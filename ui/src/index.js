@@ -67,9 +67,9 @@ class App extends React.Component {
       <div className="container text-gray-800 flex flex-col lg:flex-row max-w-7xl mx-auto text-sm xl:text-base pt-8">
         <UptimeRobot uptimeRobot={uptimeRobot} />
         <Unifi unifi={unifi} />
+        <Netdata netdataDo={netdataDo} netdataHome={netdataHome} />
         <Seafile seafile={seafile} />
         <Plex plex={plex} />
-        <Netdata netdataDo={netdataDo} netdataHome={netdataHome} />
       </div>
     );
   }
