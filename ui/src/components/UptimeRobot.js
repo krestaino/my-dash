@@ -4,8 +4,8 @@ import classNames from "classnames";
 
 import Loading from "./Loading.js";
 import blur from "../blur.js";
-import { ReactComponent as IconError } from "../assets/exclamation-triangle-solid.svg";
-import { ReactComponent as IconSuccess } from "../assets/check-circle-solid.svg";
+import { ReactComponent as IconError } from "../assets/svg/exclamation-triangle-solid.svg";
+import { ReactComponent as IconSuccess } from "../assets/svg/check-circle-solid.svg";
 
 export default class UptimeRobot extends Component {
   static propTypes = {

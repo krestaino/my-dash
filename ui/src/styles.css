@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Ubuntu";
+  src: url("/Ubuntu-Regular.woff2") format("woff2");
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
 .box {
   @apply bg-white p-4 border shadow-md rounded w-full overflow-hidden;
 }
@@ -16,6 +25,7 @@ h2 {
   width: 1.75rem;
   height: 1.75rem;
 }
+
 .loader {
   margin: 2rem auto;
   position: relative;
@@ -26,6 +36,7 @@ h2 {
   transform: translateZ(0);
   animation: spin 1.1s infinite linear;
 }
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
