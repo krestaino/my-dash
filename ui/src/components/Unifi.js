@@ -23,10 +23,7 @@ export default class Unifi extends Component {
                 <li className="box mb-8 flex flex-col" key={system.subsystem}>
                   <div className="justify-between flex w-full">
                     <span className="uppercase">{system.subsystem}</span>
-                    <span
-                      className="text-gray-600 text-sm self-end"
-                      style={blur}
-                    >
+                    <span className="text-gray-600 text-sm self-end">
                       {system.num_user && (
                         <span>Clients: {system.num_user}</span>
                       )}
