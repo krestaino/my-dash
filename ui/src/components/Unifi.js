@@ -17,38 +17,52 @@ export default class Unifi extends Component {
           <Loading />
         ) : (
           unifi.data.map(system => {
-            return (
-              <li className="box mb-8 flex flex-col" key={system.subsystem}>
-                <div className="justify-between flex w-full">
-                  <span className="uppercase">{system.subsystem}</span>
-                  {system.num_user && (
-                    <span className="text-gray-600 text-sm">
-                      Clients: {system.num_user}
-                    </span>
-                  )}
-                  {system.remote_user_num_active && (
-                    <span className="text-gray-600 text-sm">
-                      Clients: {system.remote_user_num_active}
-                    </span>
-                  )}
-                </div>
-                <div className="text-gray-600 text-xs">
-                  {system.wan_ip && <div>IP: {system.wan_ip}</div>}
-                  {system["tx_bytes-r"] && (
-                    <div>Tx: {system["tx_bytes-r"]}</div>
-                  )}
-                  {system["rx_bytes-r"] && (
-                    <div>Rx: {system["rx_bytes-r"]}</div>
-                  )}
-                  {system.remote_user_tx_bytes && (
-                    <div>Tx: {system.remote_user_tx_bytes}</div>
-                  )}
-                  {system.remote_user_rx_bytes && (
-                    <div>Rx: {system.remote_user_rx_bytes}</div>
-                  )}
-                </div>
-              </li>
-            );
+            if (system.subsystem !== "www") {
+              return (
+                <li className="box mb-8 flex flex-col" key={system.subsystem}>
+                  <div className="justify-between flex w-full">
+                    <span className="uppercase">{system.subsystem}</span>
+                    {system.num_user && (
+                      <span className="text-gray-600 text-sm">
+                        Clients: {system.num_user}
+                      </span>
+                    )}
+                    {system.remote_user_num_active !== undefined && (
+                      <span className="text-gray-600 text-sm">
+                        Clients: {system.remote_user_num_active}
+                      </span>
+                    )}
+                    {system.wan_ip && (
+                      <span className="text-gray-600 text-sm">
+                        {system.wan_ip}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-gray-600 text-xs">
+                    {system["tx_bytes-r"] && (
+                      <div>
+                        Tx: {system["tx_bytes-r"].toLocaleString()} bytes
+                      </div>
+                    )}
+                    {system["rx_bytes-r"] && (
+                      <div>
+                        Rx: {system["rx_bytes-r"].toLocaleString()} bytes
+                      </div>
+                    )}
+                    {system.remote_user_tx_bytes !== undefined && (
+                      <div>
+                        Tx: {system.remote_user_tx_bytes.toLocaleString()} bytes
+                      </div>
+                    )}
+                    {system.remote_user_rx_bytes !== undefined && (
+                      <div>
+                        Rx: {system.remote_user_rx_bytes.toLocaleString()} bytes
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            }
           })
         )}
       </div>
