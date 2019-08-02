@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 
 import Loading from "./Loading.js";
+import blur from "../blur.js";
 import { ReactComponent as IconError } from "../assets/exclamation-triangle-solid.svg";
 import { ReactComponent as IconSuccess } from "../assets/check-circle-solid.svg";
 
@@ -38,6 +39,7 @@ export default class UptimeRobot extends Component {
                     href={`https://uptimerobot.com/dashboard#${monitor.id}`}
                     rel="noopener noreferrer"
                     target="_blank"
+                    style={blur}
                   >
                     {monitor.friendly_name}
                   </a>

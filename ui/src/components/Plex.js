@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Loading from "./Loading.js";
+import blur from "../blur.js";
 
 export default class Plex extends Component {
   static propTypes = {
@@ -65,9 +66,10 @@ export default class Plex extends Component {
                       alt={stream.User.title}
                       className="rounded-full h-8 w-8 mr-4"
                       src={stream.User.thumb}
+                      style={blur}
                     />
                     <div className="text-gray-600 text-sm">
-                      <div>{stream.User.title}</div>
+                      <div style={blur}>{stream.User.title}</div>
                       <div>
                         {stream.Player.device} · {stream.Player.platform}
                       </div>

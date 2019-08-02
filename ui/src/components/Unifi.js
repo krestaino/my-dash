@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Loading from "./Loading.js";
+import blur from "../blur.js";
 
 export default class Unifi extends Component {
   static propTypes = {
@@ -33,7 +34,7 @@ export default class Unifi extends Component {
                       </span>
                     )}
                     {system.wan_ip && (
-                      <span className="text-gray-600 text-sm">
+                      <span className="text-gray-600 text-sm" style={blur}>
                         {system.wan_ip}
                       </span>
                     )}
