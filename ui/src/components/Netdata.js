@@ -13,7 +13,7 @@ export default class Netdata extends Component {
     const { netdataDo, netdataHome } = this.props;
     const data = [netdataDo, netdataHome];
     return (
-      <div className="lg:w-1/5 px-4 mb-8">
+      <div className="lg:w-1/5 px-4">
         <h2>Netdata</h2>
         {netdataDo === null && netdataHome === null ? (
           <Loading />
