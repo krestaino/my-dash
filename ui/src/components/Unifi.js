@@ -63,6 +63,8 @@ export default class Unifi extends Component {
                   </div>
                 </li>
               );
+            } else {
+              return null;
             }
           })
         )}
