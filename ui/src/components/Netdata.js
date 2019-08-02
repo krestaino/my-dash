@@ -25,6 +25,29 @@ export default class Netdata extends Component {
                 <div className="text-gray-600 text-xs">
                   {server.os_name} {server.os_version}
                 </div>
+                <div className="border-t mt-4 -m-4 p-4">
+                  <div className="mb-2 text-sm">Alarms</div>
+                  <div className="text-gray-600 text-sm justify-between flex w-full">
+                    Critical
+                    <span className={server.alarms.critical && "text-red-600"}>
+                      {server.alarms.critical}
+                    </span>
+                  </div>
+                  <div className="text-gray-600 text-sm justify-between flex w-full">
+                    Warning
+                    <span
+                      className={server.alarms.warning && "text-yellow-600"}
+                    >
+                      {server.alarms.warning}
+                    </span>
+                  </div>
+                  <div className="text-gray-600 text-sm justify-between flex w-full">
+                    Normal
+                    <span className="text-green-600">
+                      {server.alarms.normal}
+                    </span>
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
