@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .box {
-  @apply p-4 border shadow-md rounded w-full overflow-hidden;
+  @apply bg-white p-4 border shadow-md rounded w-full overflow-hidden;
 }
 
 h2 {
