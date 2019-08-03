@@ -39,14 +39,6 @@ input::placeholder {
   @apply text-gray-400;
 }
 
-.icon-theme {
-  transition: transform 0.3s;
-}
-
-.mode-dark .icon-theme {
-  transform: rotate(180deg);
-}
-
 .loader,
 .loader:after {
   border-radius: 50%;
