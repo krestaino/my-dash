@@ -30,9 +30,9 @@ app.use(
 );
 
 app.get("/seafile", authenticate, ({ res }) => {
-  axios(`${process.env.SEAFILE_URL}/api2/repos/`, {
+  axios(process.env.SEAFILE_URL + "/api2/repos/", {
     headers: {
-      Authorization: `Token ${process.env.SEAFILE_TOKEN}`
+      Authorization: "Token " + process.env.SEAFILE_TOKEN
     }
   })
     .then(response => {
@@ -44,7 +44,7 @@ app.get("/seafile", authenticate, ({ res }) => {
 });
 
 app.get("/plex", authenticate, ({ res }) => {
-  axios(`${process.env.PLEX_URL}/status/sessions`, {
+  axios(process.env.PLEX_URL + "/status/sessions", {
     params: {
       "X-Plex-Token": process.env.PLEX_TOKEN
     }
@@ -59,14 +59,14 @@ app.get("/plex", authenticate, ({ res }) => {
 
 app.get("/unifi", authenticate, ({ res }) => {
   axios
-    .post(`${process.env.UNIFI_URL}/api/login`, {
+    .post(process.env.UNIFI_URL + "/api/login", {
       username: process.env.UNIFI_USERNAME,
       password: process.env.UNIFI_PASSWORD,
       remember: false,
       strict: true
     })
     .then(response => {
-      axios(`${process.env.UNIFI_URL}/api/s/default/stat/health`, {
+      axios(process.env.UNIFI_URL + "/api/s/default/stat/health", {
         headers: {
           cookie: response.headers["set-cookie"].toString()
         }
@@ -84,7 +84,7 @@ app.get("/unifi", authenticate, ({ res }) => {
 });
 
 app.get("/netdata-do", authenticate, ({ res }) => {
-  axios(`${process.env.NETDATA_DO_URL}/api/v1/info`)
+  axios(process.env.NETDATA_DO_URL + "/api/v1/info")
     .then(response => {
       res.send(response.data);
     })
@@ -94,7 +94,7 @@ app.get("/netdata-do", authenticate, ({ res }) => {
 });
 
 app.get("/netdata-home", authenticate, ({ res }) => {
-  axios(`${process.env.NETDATA_HOME_URL}/api/v1/info`)
+  axios(process.env.NETDATA_HOME_URL + "/api/v1/info")
     .then(response => {
       res.send(response.data);
     })
@@ -124,4 +124,4 @@ app.get("/uptime-robot", authenticate, ({ res }) => {
     });
 });
 
-app.listen(port, () => console.log(`info: listening on port ${port}!`));
+app.listen(port, () => console.log("info: listening on port " + port));
