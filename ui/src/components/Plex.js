@@ -45,7 +45,7 @@ export default class Plex extends Component {
       <div className="lg:w-1/5 px-4">
         <h2>Plex</h2>
         {!plex ? (
-          <Loading />
+          <Loading response={plex} />
         ) : (
           <ul>
             {plex.MediaContainer.size > 0 ? (

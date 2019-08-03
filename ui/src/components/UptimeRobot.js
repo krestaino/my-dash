@@ -28,7 +28,7 @@ export default class UptimeRobot extends Component {
       <div className="lg:w-1/5 px-4">
         <h2>Uptime Robot</h2>
         {!uptimeRobot ? (
-          <Loading />
+          <Loading response={uptimeRobot} />
         ) : (
           <ul className="box mb-8">
             {uptimeRobot.monitors.map(monitor => {

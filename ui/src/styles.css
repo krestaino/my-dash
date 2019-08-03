@@ -43,8 +43,6 @@ h2 {
 }
 
 .loader {
-  margin: 2rem auto;
-  position: relative;
   border-top: 0.25rem solid rgba(0, 0, 0, 0.1);
   border-right: 0.25rem solid rgba(0, 0, 0, 0.1);
   border-bottom: 0.25rem solid rgba(0, 0, 0, 0.1);

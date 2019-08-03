@@ -25,7 +25,7 @@ export default class Seafile extends Component {
       <div className="lg:w-1/5 px-4">
         <h2>Seafile</h2>
         {!seafile ? (
-          <Loading />
+          <Loading response={seafile} />
         ) : (
           seafile.map(drive => {
             return (

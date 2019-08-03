@@ -24,7 +24,7 @@ export default class Unifi extends Component {
       <div className="lg:w-1/5 px-4">
         <h2>Unifi</h2>
         {!unifi ? (
-          <Loading />
+          <Loading response={unifi} />
         ) : (
           unifi.data.map(system => {
             if (system.subsystem !== "www") {
