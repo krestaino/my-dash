@@ -15,7 +15,12 @@ require("dotenv").config();
 class App extends React.Component {
   render() {
     if (!localStorage.getItem("API_KEY")) {
-      return <Auth />;
+      return (
+        <div className="container mx-auto max-w-lg">
+          <Auth />
+          <ThemeToggle />
+        </div>
+      );
     }
 
     return (
