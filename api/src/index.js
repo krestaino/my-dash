@@ -22,7 +22,12 @@ function authenticate(req, res, next) {
   next();
 }
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.UI_ORIGIN,
+    optionsSuccessStatus: 200
+  })
+);
 
 app.get("/seafile", authenticate, ({ res }) => {
   axios(`${process.env.SEAFILE_URL}/api2/repos/`, {
