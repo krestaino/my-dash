@@ -45,7 +45,7 @@ class App extends React.Component {
       .all(
         endpoints.map(endpoint =>
           axios.get(endpoint, {
-            params: { API_KEY: process.env.REACT_APP_API_KEY }
+            params: { API_KEY: localStorage.getItem("API_KEY") }
           })
         )
       )
@@ -62,7 +62,11 @@ class App extends React.Component {
             });
           }
         )
-      );
+      )
+      .catch(() => {
+        localStorage.removeItem("API_KEY");
+        window.location.reload();
+      });
   }
 
   componentDidMount() {
