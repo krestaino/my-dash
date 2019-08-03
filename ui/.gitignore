@@ -10,6 +10,7 @@
 
 # production
 /build
+/public/styles.min.css
 
 # misc
 .DS_Store
