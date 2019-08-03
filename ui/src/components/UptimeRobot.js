@@ -38,7 +38,11 @@ export default class UptimeRobot extends Component {
                       "text-red-600": monitor.status !== 2
                     })}
                   >
-                    {monitor.status === 2 ? <IconSuccess /> : <IconError />}
+                    {monitor.status === 2 ? (
+                      <IconSuccess className="w-4" />
+                    ) : (
+                      <IconError className="w-4" />
+                    )}
                   </div>
                   <a
                     className="hover:underline"
