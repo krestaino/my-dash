@@ -9,13 +9,15 @@ import { ReactComponent as IconSuccess } from "../assets/svg/check-circle-solid.
 
 export default class UptimeRobot extends Component {
   static propTypes = {
-    uptimeRobot: PropTypes.arrayOf(
-      PropTypes.shape({
-        friendly_name: PropTypes.string,
-        status: PropTypes.number,
-        id: PropTypes.number
-      })
-    )
+    uptimeRobot: PropTypes.shape({
+      monitors: PropTypes.arrayOf(
+        PropTypes.shape({
+          friendly_name: PropTypes.string,
+          status: PropTypes.number,
+          id: PropTypes.number
+        })
+      )
+    })
   };
 
   render() {
@@ -28,7 +30,7 @@ export default class UptimeRobot extends Component {
           <Loading />
         ) : (
           <ul className="box mb-8">
-            {uptimeRobot.map(monitor => {
+            {uptimeRobot.monitors.map(monitor => {
               return (
                 <li className="flex items-center" key={monitor.friendly_name}>
                   <div
