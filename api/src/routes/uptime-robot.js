@@ -4,11 +4,7 @@ module.exports = (app, authenticate, axios) => {
       .post(process.env.UPTIME_ROBOT_URL, {
         api_key: process.env.UPTIME_ROBOT_KEY
       })
-      .then(response => {
-        res.send(response.data);
-      })
-      .catch(error => {
-        res.send(error);
-      });
+      .then(response => res.send(response.data))
+      .catch(error => res.send(error));
   });
 };

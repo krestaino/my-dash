@@ -13,15 +13,9 @@ module.exports = (app, authenticate, axios) => {
             cookie: response.headers["set-cookie"].toString()
           }
         })
-          .then(response => {
-            res.send(response.data);
-          })
-          .catch(error => {
-            res.send(error);
-          });
+          .then(response => res.send(response.data))
+          .catch(error => res.send(error));
       })
-      .catch(error => {
-        res.send(error);
-      });
+      .catch(error => res.send(error));
   });
 };

@@ -5,11 +5,7 @@ module.exports = (app, authenticate, axios) => {
         "X-Plex-Token": process.env.PLEX_TOKEN
       }
     })
-      .then(response => {
-        res.send(response.data);
-      })
-      .catch(error => {
-        res.send(error);
-      });
+      .then(response => res.send(response.data))
+      .catch(error => res.send(error));
   });
 };
