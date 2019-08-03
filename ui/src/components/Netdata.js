@@ -25,7 +25,7 @@ export default class Netdata extends Component {
                 <div className="text-gray-600 text-xs">
                   {server.os_name} {server.os_version}
                 </div>
-                <div className="border-t mt-4 -m-4 p-4">
+                <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
                   <div className="mb-2 text-sm">Alarms</div>
                   <div className="text-gray-600 text-sm justify-between flex w-full">
                     <span>Critical</span>

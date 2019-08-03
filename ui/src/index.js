@@ -8,6 +8,9 @@ import Unifi from "./components/Unifi.js";
 import Netdata from "./components/Netdata.js";
 import UptimeRobot from "./components/UptimeRobot.js";
 
+import { ReactComponent as IconSun } from "./assets/svg/sun-solid.svg";
+import { ReactComponent as IconMoon } from "./assets/svg/moon-solid.svg";
+
 require("dotenv").config();
 
 class App extends React.Component {
@@ -94,7 +97,7 @@ class App extends React.Component {
             <label className="text-gray-600 text-sm flex flex-1 items-center">
               <input
                 autoFocus
-                className="py-1 px-2 flex flex-1 rounded border rounded-tr-none rounded-br-none focus:border-gray-600 outline-none"
+                className="py-1 px-2 flex flex-1 rounded border dark:border-gray-600 focus:border-gray-600 outline-none bg-transparent"
                 type="text"
                 value={this.state.API_KEY}
                 onChange={this.handleChange}
@@ -102,7 +105,7 @@ class App extends React.Component {
               />
             </label>
             <input
-              className="bg-gray-600 text-sm text-white py-1 px-6 rounded rounded-tl-none rounded-bl-none"
+              className="bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm py-1 px-6 rounded ml-2 cursor-pointer"
               type="submit"
               value="Submit"
             />
@@ -121,7 +124,17 @@ class App extends React.Component {
     } = this.state;
 
     return (
-      <div className="container text-gray-800 flex flex-col lg:flex-row max-w-7xl mx-auto text-sm xl:text-base pt-8">
+      <div className="container flex flex-col lg:flex-row max-w-7xl mx-auto text-sm xl:text-base pt-8">
+        <button
+          className="fixed top-0 right-0 m-4 focus:outline-none"
+          title="Toggle theme"
+          onClick={() =>
+            document.querySelector("html").classList.toggle("mode-dark")
+          }
+        >
+          <IconSun className="w-4 dark:hidden" />
+          <IconMoon className="w-4 hidden dark:block" />
+        </button>
         <UptimeRobot uptimeRobot={uptimeRobot} />
         <Unifi unifi={unifi} />
         <Netdata netdataDo={netdataDo} netdataHome={netdataHome} />
