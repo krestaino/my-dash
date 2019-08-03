@@ -4,18 +4,44 @@ import { ReactComponent as IconSun } from "../assets/svg/sun-solid.svg";
 import { ReactComponent as IconMoon } from "../assets/svg/moon-solid.svg";
 
 export default class ThemeToggle extends Component {
+  setTheme(theme) {
+    const htmlSelector = document.querySelector("html");
+
+    if (theme === "light") {
+      window.localStorage.setItem("THEME", "light");
+      htmlSelector.classList.remove("mode-dark");
+    } else {
+      window.localStorage.setItem("THEME", "dark");
+      htmlSelector.classList.add("mode-dark");
+    }
+  }
+
+  componentDidMount() {
+    const theme = window.localStorage.getItem("THEME");
+
+    if (theme) {
+      this.setTheme(theme);
+    }
+  }
+
   render() {
     return (
-      <button
-        className="fixed top-0 right-0 m-4 focus:outline-none"
-        title="Toggle theme"
-        onClick={() =>
-          document.querySelector("html").classList.toggle("mode-dark")
-        }
-      >
-        <IconSun className="w-4 dark:hidden" />
-        <IconMoon className="w-4 hidden dark:block" />
-      </button>
+      <div className="fixed top-0 right-0 m-4 focus:outline-none">
+        <button
+          className="dark:hidden"
+          title="Set dark theme"
+          onClick={() => this.setTheme("dark")}
+        >
+          <IconSun className="w-4 dark:hidden" />
+        </button>
+        <button
+          className="hidden dark:block"
+          title="Set light theme"
+          onClick={() => this.setTheme("light")}
+        >
+          <IconMoon className="w-4" />
+        </button>
+      </div>
     );
   }
 }
