@@ -6,7 +6,14 @@ import Loading from "./Loading.js";
 
 export default class Seafile extends Component {
   static propTypes = {
-    seafile: PropTypes.array
+    seafile: PropTypes.arrayOf(
+      PropTypes.shape({
+        size_formatted: PropTypes.string,
+        name: PropTypes.string,
+        id: PropTypes.string,
+        mtime: PropTypes.number
+      })
+    )
   };
 
   render() {
