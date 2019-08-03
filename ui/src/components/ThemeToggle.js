@@ -26,16 +26,16 @@ export default class ThemeToggle extends Component {
 
   render() {
     return (
-      <div className="fixed top-0 right-0 m-4 focus:outline-none">
+      <div className="fixed top-0 right-0 m-4">
         <button
-          className="dark:hidden"
+          className="focus:outline-none dark:hidden"
           title="Set dark theme"
           onClick={() => this.setTheme("dark")}
         >
           <IconSun className="w-4 dark:hidden" />
         </button>
         <button
-          className="hidden dark:block"
+          className="focus:outline-none hidden dark:block"
           title="Set light theme"
           onClick={() => this.setTheme("light")}
         >
