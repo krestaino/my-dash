@@ -5,7 +5,7 @@ const axios = require("axios");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 4000;
+const port = process.env.API_PORT;
 
 const permit = new Bearer({
   query: "API_KEY"
@@ -16,7 +16,7 @@ function authenticate(req, res, next) {
 
   if (token !== process.env.API_KEY) {
     permit.fail(res);
-    return next("Invalid API key.");
+    return next("error: invalid API_KEY");
   }
 
   next();
@@ -124,4 +124,4 @@ app.get("/uptime-robot", authenticate, ({ res }) => {
     });
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(port, () => console.log(`info: listening on port ${port}!`));
