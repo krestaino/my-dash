@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { distanceInWordsToNow } from "date-fns";
 
-import api from "../api.js";
-import Loading from "./Loading.js";
+import api from "../../api.js";
+import Loading from "../Loading.js";
 
 export default class Seafile extends Component {
   state = {

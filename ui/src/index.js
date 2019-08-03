@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import UptimeRobot from "./components/UptimeRobot.js";
-import Unifi from "./components/Unifi.js";
-import Netdata from "./components/Netdata.js";
-import Seafile from "./components/Seafile.js";
-import Plex from "./components/Plex.js";
+import UptimeRobot from "./components/services/UptimeRobot.js";
+import Unifi from "./components/services/Unifi.js";
+import Netdata from "./components/services/Netdata.js";
+import Seafile from "./components/services/Seafile.js";
+import Plex from "./components/services/Plex.js";
 
 import Auth from "./components/Auth.js";
 import ThemeToggle from "./components/ThemeToggle.js";

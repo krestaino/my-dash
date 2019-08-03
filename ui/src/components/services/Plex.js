@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import api from "../api.js";
-import Loading from "./Loading.js";
+import api from "../../api.js";
+import Loading from "../Loading.js";
 
 export default class Plex extends Component {
   state = {

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 
-import api from "../api.js";
-import Loading from "./Loading.js";
+import api from "../../api.js";
+import Loading from "../Loading.js";
 
-import { ReactComponent as IconError } from "../assets/svg/exclamation-triangle-solid.svg";
-import { ReactComponent as IconSuccess } from "../assets/svg/check-circle-solid.svg";
+import { ReactComponent as IconError } from "../../assets/svg/exclamation-triangle-solid.svg";
+import { ReactComponent as IconSuccess } from "../../assets/svg/check-circle-solid.svg";
 
 export default class UptimeRobot extends Component {
   state = {
