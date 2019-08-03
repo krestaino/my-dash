@@ -24,7 +24,19 @@ h2 {
 }
 
 .mode-dark input[type="text"]:focus {
-  @apply border-gray-400;
+  @apply border-gray-300;
+}
+
+input[type="text"]:focus {
+  @apply border-gray-600;
+}
+
+input::placeholder {
+  @apply text-gray-700;
+}
+
+.mode-dark input::placeholder {
+  @apply text-gray-400;
 }
 
 .icon-theme {
