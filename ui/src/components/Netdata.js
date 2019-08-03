@@ -1,21 +1,32 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
+import api from "../api.js";
 import Loading from "./Loading.js";
 
 export default class Netdata extends Component {
-  static propTypes = {
-    netdataDo: PropTypes.object,
-    netdataHome: PropTypes.object
+  state = {
+    netdataDo: null,
+    netdataHome: null
   };
 
+  async fetch() {
+    const netdataDo = await api(process.env.REACT_APP_NETDATA_DO_ENDPOINT);
+    const netdataHome = await api(process.env.REACT_APP_NETDATA_HOME_ENDPOINT);
+    this.setState({ netdataDo, netdataHome });
+  }
+
+  componentDidMount() {
+    this.fetch();
+  }
+
   render() {
-    const { netdataDo, netdataHome } = this.props;
+    const { netdataDo, netdataHome } = this.state;
     const data = [netdataDo, netdataHome];
+
     return (
       <div className="lg:w-1/5 px-4">
         <h2>Netdata</h2>
-        {netdataDo === null && netdataHome === null ? (
+        {!netdataDo && !netdataHome ? (
           <Loading />
         ) : (
           <ul>

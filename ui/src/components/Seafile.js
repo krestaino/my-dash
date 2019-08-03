@@ -1,27 +1,30 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { distanceInWordsToNow } from "date-fns";
 
+import api from "../api.js";
 import Loading from "./Loading.js";
 
 export default class Seafile extends Component {
-  static propTypes = {
-    seafile: PropTypes.arrayOf(
-      PropTypes.shape({
-        size_formatted: PropTypes.string,
-        name: PropTypes.string,
-        id: PropTypes.string,
-        mtime: PropTypes.number
-      })
-    )
+  state = {
+    seafile: null
   };
 
+  async fetch() {
+    const seafile = await api(process.env.REACT_APP_SEAFILE_ENDPOINT);
+    this.setState({ seafile });
+  }
+
+  componentDidMount() {
+    this.fetch();
+  }
+
   render() {
-    const { seafile } = this.props;
+    const { seafile } = this.state;
+
     return (
       <div className="lg:w-1/5 px-4">
         <h2>Seafile</h2>
-        {seafile === null ? (
+        {!seafile ? (
           <Loading />
         ) : (
           seafile.map(drive => {

@@ -1,20 +1,29 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
+import api from "../api.js";
 import Loading from "./Loading.js";
-import blur from "../blur.js";
 
 export default class Unifi extends Component {
-  static propTypes = {
-    unifi: PropTypes.object
+  state = {
+    unifi: null
   };
 
+  async fetch() {
+    const unifi = await api(process.env.REACT_APP_UNIFI_ENDPOINT);
+    this.setState({ unifi });
+  }
+
+  componentDidMount() {
+    this.fetch();
+  }
+
   render() {
-    const { unifi } = this.props;
+    const { unifi } = this.state;
+
     return (
       <div className="lg:w-1/5 px-4">
         <h2>Unifi</h2>
-        {unifi === null ? (
+        {!unifi ? (
           <Loading />
         ) : (
           unifi.data.map(system => {
@@ -30,9 +39,7 @@ export default class Unifi extends Component {
                       {system.remote_user_num_active !== undefined && (
                         <span>Clients: {system.remote_user_num_active}</span>
                       )}
-                      {system.wan_ip && (
-                        <span style={blur}>{system.wan_ip}</span>
-                      )}
+                      {system.wan_ip && <span>{system.wan_ip}</span>}
                     </span>
                   </div>
                   <div className="text-gray-600 dark:text-gray-500 text-xs">

@@ -1,13 +1,21 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
+import api from "../api.js";
 import Loading from "./Loading.js";
-import blur from "../blur.js";
 
 export default class Plex extends Component {
-  static propTypes = {
-    plex: PropTypes.object
+  state = {
+    plex: null
   };
+
+  async fetch() {
+    const plex = await api(process.env.REACT_APP_PLEX_ENDPOINT);
+    this.setState({ plex });
+  }
+
+  componentDidMount() {
+    this.fetch();
+  }
 
   displayTime(millisec) {
     const normalizeTime = time =>
@@ -31,12 +39,12 @@ export default class Plex extends Component {
   }
 
   render() {
-    const { plex } = this.props;
+    const { plex } = this.state;
 
     return (
       <div className="lg:w-1/5 px-4">
         <h2>Plex</h2>
-        {plex === null ? (
+        {!plex ? (
           <Loading />
         ) : (
           <ul>
@@ -68,10 +76,9 @@ export default class Plex extends Component {
                       alt={stream.User.title}
                       className="rounded-full h-8 w-8 mr-4"
                       src={stream.User.thumb}
-                      style={blur}
                     />
                     <div className="text-gray-600 dark:text-gray-500 text-sm">
-                      <div style={blur}>{stream.User.title}</div>
+                      <div>{stream.User.title}</div>
                       <div>
                         {stream.Player.device} · {stream.Player.platform}
                       </div>

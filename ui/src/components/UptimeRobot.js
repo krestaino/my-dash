@@ -1,32 +1,33 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import api from "../api.js";
 import Loading from "./Loading.js";
-import blur from "../blur.js";
+
 import { ReactComponent as IconError } from "../assets/svg/exclamation-triangle-solid.svg";
 import { ReactComponent as IconSuccess } from "../assets/svg/check-circle-solid.svg";
 
 export default class UptimeRobot extends Component {
-  static propTypes = {
-    uptimeRobot: PropTypes.shape({
-      monitors: PropTypes.arrayOf(
-        PropTypes.shape({
-          friendly_name: PropTypes.string,
-          status: PropTypes.number,
-          id: PropTypes.number
-        })
-      )
-    })
+  state = {
+    uptimeRobot: null
   };
 
+  async fetch() {
+    const uptimeRobot = await api(process.env.REACT_APP_UPTIME_ROBOT_ENDPOINT);
+    this.setState({ uptimeRobot });
+  }
+
+  componentDidMount() {
+    this.fetch();
+  }
+
   render() {
-    const { uptimeRobot } = this.props;
+    const { uptimeRobot } = this.state;
 
     return (
       <div className="lg:w-1/5 px-4">
         <h2>Uptime Robot</h2>
-        {uptimeRobot === null ? (
+        {!uptimeRobot ? (
           <Loading />
         ) : (
           <ul className="box mb-8">
@@ -51,7 +52,6 @@ export default class UptimeRobot extends Component {
                     href={`https://uptimerobot.com/dashboard#${monitor.id}`}
                     rel="noopener noreferrer"
                     target="_blank"
-                    style={blur}
                   >
                     {monitor.friendly_name}
                   </a>
