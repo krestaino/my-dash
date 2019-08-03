@@ -1,14 +1,30 @@
 require("dotenv").config();
 
+const { Bearer } = require("permit");
 const axios = require("axios");
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const port = 4000;
 
+const permit = new Bearer({
+  query: "API_KEY"
+});
+
+function authenticate(req, res, next) {
+  const token = permit.check(req);
+
+  if (token !== process.env.API_KEY) {
+    permit.fail(res);
+    return next("Invalid API key.");
+  }
+
+  next();
+}
+
 app.use(cors());
 
-app.get("/seafile", ({ res }) => {
+app.get("/seafile", authenticate, ({ res }) => {
   axios(`${process.env.SEAFILE_URL}/api2/repos/`, {
     headers: {
       Authorization: `Token ${process.env.SEAFILE_TOKEN}`
@@ -22,7 +38,7 @@ app.get("/seafile", ({ res }) => {
     });
 });
 
-app.get("/plex", ({ res }) => {
+app.get("/plex", authenticate, ({ res }) => {
   axios(`${process.env.PLEX_URL}/status/sessions`, {
     params: {
       "X-Plex-Token": process.env.PLEX_TOKEN
@@ -36,7 +52,7 @@ app.get("/plex", ({ res }) => {
     });
 });
 
-app.get("/unifi", ({ res }) => {
+app.get("/unifi", authenticate, ({ res }) => {
   axios
     .post(`${process.env.UNIFI_URL}/api/login`, {
       username: process.env.UNIFI_USERNAME,
@@ -62,7 +78,7 @@ app.get("/unifi", ({ res }) => {
     });
 });
 
-app.get("/netdata-do", ({ res }) => {
+app.get("/netdata-do", authenticate, ({ res }) => {
   axios(`${process.env.NETDATA_DO_URL}/api/v1/info`)
     .then(response => {
       res.send(response.data);
@@ -72,7 +88,7 @@ app.get("/netdata-do", ({ res }) => {
     });
 });
 
-app.get("/netdata-home", ({ res }) => {
+app.get("/netdata-home", authenticate, ({ res }) => {
   axios(`${process.env.NETDATA_HOME_URL}/api/v1/info`)
     .then(response => {
       res.send(response.data);
@@ -82,7 +98,7 @@ app.get("/netdata-home", ({ res }) => {
     });
 });
 
-app.get("/uptime-robot", ({ res }) => {
+app.get("/uptime-robot", authenticate, ({ res }) => {
   axios
     .post("https://api.uptimerobot.com/v2/getMonitors", {
       api_key: process.env.UPTIME_ROBOT_KEY
