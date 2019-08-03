@@ -94,7 +94,7 @@ class App extends React.Component {
           onSubmit={this.handleSubmit}
         >
           <div className="box flex mt-8">
-            <label className="text-gray-600 text-sm flex flex-1 items-center">
+            <label className="text-gray-600 dark:text-gray-500 text-sm flex flex-1 items-center">
               <input
                 autoFocus
                 className="py-1 px-2 flex flex-1 rounded border dark:border-gray-600 focus:border-gray-600 outline-none bg-transparent"
@@ -105,7 +105,7 @@ class App extends React.Component {
               />
             </label>
             <input
-              className="bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm py-1 px-6 rounded ml-2 cursor-pointer"
+              className="bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-500 dark:text-gray-300 text-sm py-1 px-6 rounded ml-2 cursor-pointer"
               type="submit"
               value="Submit"
             />

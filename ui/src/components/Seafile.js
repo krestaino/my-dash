@@ -36,11 +36,11 @@ export default class Seafile extends Component {
                   >
                     {drive.name}
                   </a>
-                  <span className="text-gray-600 text-sm">
+                  <span className="text-gray-600 dark:text-gray-500 text-sm">
                     {drive.size_formatted}
                   </span>
                 </div>
-                <div className="text-gray-600 text-xs">
+                <div className="text-gray-600 dark:text-gray-500 text-xs">
                   <span>Last modified: </span>
                   <span>
                     {distanceInWordsToNow(new Date(drive.mtime * 1000))}

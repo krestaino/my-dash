@@ -48,7 +48,7 @@ export default class Plex extends Component {
                   ) : (
                     <div>{stream.title}</div>
                   )}
-                  <div className="text-gray-600 text-sm">
+                  <div className="text-gray-600 dark:text-gray-500 text-sm">
                     {stream.parentIndex && stream.index && (
                       <span className="pr-2">
                         S{stream.parentIndex} · E{stream.index} {stream.title}
@@ -56,9 +56,11 @@ export default class Plex extends Component {
                     )}
                   </div>
                   {(!stream.parentIndex || !stream.index) && (
-                    <div className="text-gray-600 text-sm">{stream.year}</div>
+                    <div className="text-gray-600 dark:text-gray-500 text-sm">
+                      {stream.year}
+                    </div>
                   )}
-                  <div className="text-gray-600 text-sm">
+                  <div className="text-gray-600 dark:text-gray-500 text-sm">
                     {this.displayTime(stream.duration, "H mm")}
                   </div>
                   <div className="flex items-center mt-4 -m-4 p-4 relative border-t dark:border-gray-700">
@@ -68,7 +70,7 @@ export default class Plex extends Component {
                       src={stream.User.thumb}
                       style={blur}
                     />
-                    <div className="text-gray-600 text-sm">
+                    <div className="text-gray-600 dark:text-gray-500 text-sm">
                       <div style={blur}>{stream.User.title}</div>
                       <div>
                         {stream.Player.device} · {stream.Player.platform}
@@ -84,7 +86,7 @@ export default class Plex extends Component {
                 </li>
               ))
             ) : (
-              <div className="box text-center text-gray-600 text-sm">
+              <div className="box text-center text-gray-600 dark:text-gray-500 text-sm">
                 No active streams
               </div>
             )}
