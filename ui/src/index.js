@@ -93,7 +93,8 @@ class App extends React.Component {
           <div className="box flex mt-8">
             <label className="text-gray-600 text-sm flex flex-1 items-center">
               <input
-                className="py-1 px-2 flex flex-1 rounded border rounded-tr-none rounded-br-none"
+                autoFocus
+                className="py-1 px-2 flex flex-1 rounded border rounded-tr-none rounded-br-none focus:border-gray-600 outline-none"
                 type="text"
                 value={this.state.API_KEY}
                 onChange={this.handleChange}
