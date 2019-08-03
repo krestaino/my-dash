@@ -47,7 +47,7 @@ class App extends React.Component {
     axios
       .all(
         endpoints.map(endpoint =>
-          axios.get(endpoint, {
+          axios.get(process.env.REACT_APP_API_URL + endpoint, {
             params: { API_KEY: localStorage.getItem("API_KEY") }
           })
         )
