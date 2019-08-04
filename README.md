@@ -68,7 +68,7 @@ $ yarn install
 $ npm install
 ```
 
-#### Start server
+#### Start development server
 
 ```
 # from ./ui/
@@ -106,7 +106,7 @@ I recommend you check out the two folders [api/src/routes](api/src/routes) and [
 
 But as a _very_ brief walk-through:
 
-1. Add endpoints and/or credentials to the API `.env` file.
+1. Add endpoints and/or credentials to the corresponding `.env` file.
 2. Create a new route in [api/src/routes](api/src/routes) with the name of your new service. All files in the routes folder are automatically imported.
 3. Create a new component in the [ui/src/components/services](ui/src/components/services) folder and import it into the main app entry point [ui/src/index.js](ui/src/index.js).
 
