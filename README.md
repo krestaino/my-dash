@@ -30,7 +30,7 @@ The UI fetches data gathered by the API and renders the content. Styling is all 
 
 I recommend you check out the two folders [api/src/routes](api/src/routes) and [ui/src/components/services](ui/src/components/services) to see how the existing services are implemented.
 
-But as a very brief rule of thumb:
+But as a _very_ brief walk-through:
 
 1. Add endpoints and/or credentials to the API `.env` file.
 2. Create a new route in [api/src/routes](api/src/routes) with the name of your new service. All files in the routes folder are automatically imported.
