@@ -96,9 +96,9 @@ First create an `.env` file at the root of the [ui](ui) folder. Follow the templ
 
 #### `REACT_APP_API_URL`
 
-The URL of your API server. For local development, this is `http://localhost:4000`, unless you changed `API_PORT` in the API's `.env` file. For production environments, remember to set the correct URL as `http://localhost:4000` is probably not what you want.
+The URL of your API server. For local development, this is `http://localhost:4000`, unless you changed `API_PORT` in the API `.env` file. For production environments, remember to set the correct URL as `http://localhost:4000` is probably not what you want.
 
-## Adding your own servies
+## Adding your own services
 
 I recommend you check out the two folders [api/src/routes](api/src/routes) and [ui/src/components/services](ui/src/components/services) to see how the existing services are implemented.
 
