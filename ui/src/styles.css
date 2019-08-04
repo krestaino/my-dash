@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Used to hide somewhat private data when taking screenshots which will be shared */
+/*
+.container > div:nth-child(1) a,
+.container > div:nth-child(2) li:nth-child(3) div span:last-child {
+  filter: blur(4px);
+}
+*/
+
 @font-face {
   font-family: "Ubuntu";
   src: url("/Ubuntu-Regular.woff2") format("woff2");
@@ -19,8 +27,13 @@ body {
   @apply bg-gray-800 border-gray-700;
 }
 
+h1,
 h2 {
   @apply mb-2 text-center uppercase text-gray-600 text-xs;
+}
+
+h1 {
+  @apply text-sm;
 }
 
 .mode-dark input[type="text"]:focus {

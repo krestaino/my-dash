@@ -17,7 +17,7 @@ class App extends React.Component {
     if (!localStorage.getItem("API_KEY")) {
       return (
         <div className="container mx-auto max-w-lg py-8 px-4">
-          <h2>My Dash</h2>
+          <h1>My Dash</h1>
           <Auth />
           <ThemeToggle />
         </div>
