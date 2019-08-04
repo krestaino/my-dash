@@ -52,7 +52,7 @@ If the API rejects the key, the UI will automatically delete the invalid key in 
 
 ## UI
 
-The UI fetches data gathered by the API and renders the content. Styling is all handling by [Tailwind CSS](https://tailwindcss.com/), head over there to learn more about it.
+The UI fetches data gathered by the API and renders the content. Styling is all handled by [Tailwind CSS](https://tailwindcss.com/), head over there to learn more about it.
 
 ### Development
 
