@@ -118,7 +118,7 @@ https://uptimerobot.com/api
 
 ### You want me to add my Unifi username and password, are you insane?
 
-I agree, but we can mitigate the security vulnerability by creating a new `admin` with a `Read Only` access.
+I agree, but we can mitigate the security vulnerability by creating a new `admin` with `Read Only` access.
 
 Head over to `YOUR_UNIFI_URL`/`manage/site/default/settings/admins/list` and create a new admin with those limited privileges.
 
