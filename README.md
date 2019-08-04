@@ -110,6 +110,30 @@ But as a _very_ brief walk-through:
 2. Create a new route in [api/src/routes](api/src/routes) with the name of your new service. All files in the routes folder are automatically imported.
 3. Create a new component in the [ui/src/components/services](ui/src/components/services) folder and import it into the main app entry point [ui/src/index.js](ui/src/index.js).
 
+## FAQ
+
+### How do I get my Uptime Robot API key?
+
+https://uptimerobot.com/api
+
+### You want me to add my Unifi username and password, are you insane?
+
+I agree, but we can mitigate the security vulnerability by creating a new `admin` with a `Read Only` access.
+
+Head over to `YOUR_UNIFI_URL`/`manage/site/default/settings/admins/list` and create a new admin with those limited privileges.
+
+### Where are the Netdata API docs?
+
+https://docs.netdata.cloud/web/api/
+
+### How do I get my Seafile API token?
+
+https://download.seafile.com/published/web-api/home.md
+
+### How do I get my Plex API token?
+
+Login to your Plex application, open up dev tool and inspect any of the `XHR` requests. Look for the paramter `X-Plex-Token`.
+
 ## Contributing
 
 I'm happy to accept pull requests to this repo that contain bug fixes, code cleanup, refactoring, or general improvements to the existing code base. If you want to add new services, I suggest you fork the repo. This repo is meant to be a template for you, not a megalithic repo that has components for every service under the sun.
