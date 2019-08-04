@@ -93,7 +93,7 @@ export default class Plex extends Component {
                 </li>
               ))
             ) : (
-              <div className="box text-center text-gray-600 dark:text-gray-500 text-sm">
+              <div className="box text-center text-gray-600 dark:text-gray-500 text-sm mb-8">
                 No active streams
               </div>
             )}

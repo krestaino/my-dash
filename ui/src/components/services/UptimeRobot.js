@@ -30,10 +30,13 @@ export default class UptimeRobot extends Component {
         {!uptimeRobot ? (
           <Loading response={uptimeRobot} />
         ) : (
-          <ul className="box mb-8">
+          <ul className="box mb-8 flex lg:flex-col flex-wrap">
             {uptimeRobot.monitors.map(monitor => {
               return (
-                <li className="flex items-center" key={monitor.friendly_name}>
+                <li
+                  className="flex items-center w-1/2 lg:w-full mb-1"
+                  key={monitor.friendly_name}
+                >
                   <div
                     className={classNames({
                       "mr-2": true,
