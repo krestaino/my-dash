@@ -6,6 +6,32 @@
 
 The API fetches data and contains all the credentials to the various services you want to monitor.
 
+### Development
+
+#### Install dependencies
+
+```
+$ cd api
+
+# using yarn
+$ yarn install
+
+# using npm
+$ npm install
+```
+
+#### Start server
+
+```
+# from ./api/
+
+# using yarn
+$ yarn start
+
+# using npm
+$ npm run start
+```
+
 ### Environmental Variables
 
 First create an `.env` file at the root of the [api](api) folder. Follow the template file at [api/.env.template](api/.env.template) as an example.
@@ -25,6 +51,52 @@ If the API rejects the key, the UI will automatically delete the invalid key in 
 ## UI
 
 The UI fetches data gathered by the API and renders the content. Styling is all handling by [Tailwind CSS](https://tailwindcss.com/), head over there to learn more about it.
+
+### Development
+
+#### Install dependencies
+
+```
+$ cd ui
+
+# using yarn
+$ yarn install
+
+# using npm
+$ npm install
+```
+
+#### Start server
+
+```
+# from ./ui/
+
+# using yarn
+$ yarn start
+
+# using npm
+$ npm run start
+```
+
+#### Build for production
+
+```
+# from ./ui/
+
+# using yarn
+$ yarn build
+
+# using npm
+$ npm run build
+```
+
+### Environmental Variables
+
+First create an `.env` file at the root of the [ui](ui) folder. Follow the template file at [ui/.env.template](ui/.env.template) as an example.
+
+#### `REACT_APP_API_URL`
+
+The URL of your API server. For local development, this is `http://localhost:4000`, unless you changed `API_PORT` in the API's `.env` file. For production environments, remember to set the correct URL as `http://localhost:4000` is probably not what you want.
 
 ## Adding your own servies
 
