@@ -14,7 +14,7 @@ require("dotenv").config();
 
 class App extends React.Component {
   render() {
-    if (!localStorage.getItem("API_KEY")) {
+    if (!window.localStorage.getItem("API_KEY")) {
       return (
         <div className="container mx-auto max-w-lg py-8 px-4">
           <h1>My Dash</h1>
