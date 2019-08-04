@@ -120,7 +120,7 @@ https://uptimerobot.com/api
 
 I agree, but we can mitigate the security vulnerability by creating a new `admin` with `Read Only` access.
 
-Head over to `YOUR_UNIFI_URL`/`manage/site/default/settings/admins/list` and create a new admin with those limited privileges.
+Head over to `YOUR_UNIFI_URL/manage/site/default/settings/admins/list` and create a new admin with those limited privileges.
 
 ### Where are the Netdata API docs?
 
