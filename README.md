@@ -132,7 +132,7 @@ https://download.seafile.com/published/web-api/home.md
 
 ### How do I get my Plex API token?
 
-Login to your Plex application, open up dev tool and inspect any of the `XHR` requests. Look for the paramter `X-Plex-Token`.
+Login to your Plex application, open up your dev tools and inspect any of the `XHR` requests. Look for the parameter `X-Plex-Token`.
 
 ## Contributing
 
