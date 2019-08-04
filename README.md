@@ -1,6 +1,6 @@
 # My Dash
 
-Another dashboard for your self hosted applications.
+Another dashboard for your self-hosted applications.
 
 ![Screenshot](screenshot.png)
 
