@@ -36,7 +36,7 @@ $ npm run start
 
 ### Environmental Variables
 
-First create an `.env` file at the root of the [api](api) folder. Follow the template file at [api/.env.template](api/.env.template) as an example.
+Create an `.env` file at the root of the [api](api) folder. Follow the template file at [api/.env.template](api/.env.template) as an example.
 
 #### `API_KEY`
 
@@ -94,7 +94,7 @@ $ npm run build
 
 ### Environmental Variables
 
-First create an `.env` file at the root of the [ui](ui) folder. Follow the template file at [ui/.env.template](ui/.env.template) as an example.
+Create an `.env` file at the root of the [ui](ui) folder. Follow the template file at [ui/.env.template](ui/.env.template) as an example.
 
 #### `REACT_APP_API_URL`
 
