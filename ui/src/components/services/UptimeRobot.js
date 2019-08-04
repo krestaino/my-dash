@@ -19,6 +19,10 @@ export default class UptimeRobot extends Component {
 
   componentDidMount() {
     this.fetch();
+
+    setInterval(() => {
+      this.fetch();
+    }, 30000);
   }
 
   render() {

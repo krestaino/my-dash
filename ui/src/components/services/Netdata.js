@@ -17,6 +17,10 @@ export default class Netdata extends Component {
 
   componentDidMount() {
     this.fetch();
+
+    setInterval(() => {
+      this.fetch();
+    }, 2000);
   }
 
   render() {

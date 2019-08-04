@@ -15,6 +15,10 @@ export default class Plex extends Component {
 
   componentDidMount() {
     this.fetch();
+
+    setInterval(() => {
+      this.fetch();
+    }, 5000);
   }
 
   displayTime(millisec) {
