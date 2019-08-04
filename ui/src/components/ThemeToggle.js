@@ -26,7 +26,7 @@ export default class ThemeToggle extends Component {
 
   render() {
     return (
-      <div className="fixed top-0 right-0 m-4">
+      <div className="absolute top-0 right-0 m-4">
         <button
           className="focus:outline-none dark:hidden"
           title="Set dark theme"
