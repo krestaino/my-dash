@@ -112,4 +112,4 @@ But as a _very_ brief walk-through:
 
 I'm happy to accept pull requests to this repo that contain bug fixes, code cleanup, refactoring, or general improvements to the existing code base. If you want to add new services, I suggest you fork the repo. This repo is meant to be a template for you, not a megalithic repo that has components for every service under the sun.
 
-If you can think of a way to abstract the API and UI components so this repo can be shared, please get in contact with me! As I was developing it, I realized I was making a lot of very opinionated decisions regarding how data is rendered, and what data I even wanted. In an effort to just get this out the door and share it, I decided it would be best if people just forked it.
+If you can think of a way to abstract the API and UI components so these components can be shared, please get in contact with me! As I was developing it, I realized I was making a lot of very opinionated decisions regarding how data is rendered, and what data I wanted. In an effort to just get this out the door and share it, I decided it would be best if people just forked it.
