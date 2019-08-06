@@ -1,20 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import UptimeRobot from "./components/services/UptimeRobot.js";
-import Unifi from "./components/services/Unifi.js";
-import Netdata from "./components/services/Netdata.js";
-import Seafile from "./components/services/Seafile.js";
-import Plex from "./components/services/Plex.js";
+import UptimeRobot from './components/services/UptimeRobot.js';
+import Unifi from './components/services/Unifi.js';
+import Netdata from './components/services/Netdata.js';
+import Seafile from './components/services/Seafile.js';
+import Plex from './components/services/Plex.js';
 
-import Auth from "./components/Auth.js";
-import ThemeToggle from "./components/ThemeToggle.js";
+import Auth from './components/Auth.js';
+import ThemeToggle from './components/ThemeToggle.js';
 
-require("dotenv").config();
+require('dotenv').config();
 
 class App extends React.Component {
   render() {
-    if (!window.localStorage.getItem("API_KEY")) {
+    if (!window.localStorage.getItem('API_KEY')) {
       return (
         <div className="container mx-auto max-w-lg py-8 px-4">
           <h1>My Dash</h1>
@@ -37,4 +37,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));

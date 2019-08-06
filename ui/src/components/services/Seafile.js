@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { distanceInWordsToNow } from "date-fns";
+import React, { Component } from 'react';
+import { distanceInWordsToNow } from 'date-fns';
 
-import api from "../../api.js";
-import Loading from "../Loading.js";
+import api from '../../api.js';
+import Loading from '../Loading.js';
 
 export default class Seafile extends Component {
   state = {
@@ -43,15 +43,11 @@ export default class Seafile extends Component {
                   >
                     {drive.name}
                   </a>
-                  <span className="text-gray-600 dark:text-gray-500 text-sm">
-                    {drive.size_formatted}
-                  </span>
+                  <span className="text-gray-600 dark:text-gray-500 text-sm">{drive.size_formatted}</span>
                 </div>
                 <div className="text-gray-600 dark:text-gray-500 text-xs">
                   <span>Last modified: </span>
-                  <span>
-                    {distanceInWordsToNow(new Date(drive.mtime * 1000))}
-                  </span>
+                  <span>{distanceInWordsToNow(new Date(drive.mtime * 1000))}</span>
                   <span> ago</span>
                 </div>
               </li>

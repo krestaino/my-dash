@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
-import { ReactComponent as IconError } from "../assets/svg/exclamation-triangle-solid.svg";
+import { ReactComponent as IconError } from '../assets/svg/exclamation-triangle-solid.svg';
 
 export default class Loading extends PureComponent {
   render() {

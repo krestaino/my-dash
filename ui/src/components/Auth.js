@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 export default class Auth extends Component {
   state = {
-    API_KEY: ""
+    API_KEY: ''
   };
 
   handleChange = event => {
@@ -11,7 +11,7 @@ export default class Auth extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    window.localStorage.setItem("API_KEY", this.state.API_KEY);
+    window.localStorage.setItem('API_KEY', this.state.API_KEY);
     window.location.reload();
   };
 

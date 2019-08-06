@@ -1,7 +1,7 @@
-const { Bearer } = require("permit");
+const { Bearer } = require('permit');
 
 const permit = new Bearer({
-  query: "API_KEY"
+  query: 'API_KEY'
 });
 
 module.exports = (req, res, next) => {
@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
   if (token !== process.env.API_KEY) {
     permit.fail(res);
-    return next("error: invalid API_KEY");
+    return next('error: invalid API_KEY');
   }
 
   next();
