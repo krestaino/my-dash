@@ -6,25 +6,25 @@ Another dashboard for your self-hosted applications.
 
 ## Quick Start
 
-Install API and UI dependencies
+**Install API and UI dependencies**
 
 ```
 $ yarn setup
 ```
 
-Start API and UI development servers
+**Start API and UI development servers**
 
 ```
 $ yarn start
 ```
 
-Build API and UI for production
+**Build API and UI for production**
 
 ```
 $ yarn build
 ```
 
-Serve API for production
+**Serve API for production**
 
 ```
 $ yarn serve
