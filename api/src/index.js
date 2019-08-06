@@ -8,14 +8,7 @@ const authenticate = require('./auth.js');
 const port = process.env.API_PORT;
 const app = express();
 
-app.use('/', express.static('ui'));
-
-app.use(
-  cors({
-    origin: process.env.UI_ORIGIN,
-    optionsSuccessStatus: 200
-  })
-);
+app.use(cors({ origin: process.env.UI_ORIGIN }));
 
 require('./routes.js')(app, authenticate, axios);
 
