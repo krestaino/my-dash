@@ -8,6 +8,8 @@ const authenticate = require('./auth.js');
 const port = process.env.API_PORT;
 const app = express();
 
+app.use('/', express.static('ui'));
+
 app.use(
   cors({
     origin: process.env.UI_ORIGIN,
