@@ -9,7 +9,8 @@
     "start": "concurrently \"yarn start:api\" \"yarn start:ui\"",
     "start:api": "yarn --cwd api/ start",
     "start:ui": "yarn --cwd ui/ start",
-    "build": "yarn --cwd api/ build && yarn --cwd ui/ build"
+    "build": "yarn --cwd api/ build && yarn --cwd ui/ build",
+    "serve": "yarn --cwd api/ serve"
   },
   "dependencies": {
     "concurrently": "^4.1.0"
