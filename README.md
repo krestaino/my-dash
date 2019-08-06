@@ -4,35 +4,35 @@ Another dashboard for your self-hosted applications.
 
 ![Screenshot](screenshot.png)
 
+## Quick Start
+
+### Install API and UI dependencies
+
+```
+$ yarn setup
+```
+
+### Start API and UI development servers
+
+```
+$ yarn start
+```
+
+### Build API and UI for production
+
+```
+$ yarn build
+```
+
+### Serve API for production
+
+```
+$ yarn serve
+```
+
 ## API
 
 The API fetches data and contains all the credentials to the various services you want to monitor.
-
-### Development
-
-#### Install dependencies
-
-```
-$ cd api
-
-# using yarn
-$ yarn install
-
-# using npm
-$ npm install
-```
-
-#### Start server
-
-```
-# from ./api/
-
-# using yarn
-$ yarn start
-
-# using npm
-$ npm run start
-```
 
 ### Environmental Variables
 
@@ -53,44 +53,6 @@ If the API rejects the key, the UI will automatically delete the invalid key in 
 ## UI
 
 The UI fetches data gathered by the API and renders the content. Styling is all handled by [Tailwind CSS](https://tailwindcss.com/), head over there to learn more about it.
-
-### Development
-
-#### Install dependencies
-
-```
-$ cd ui
-
-# using yarn
-$ yarn install
-
-# using npm
-$ npm install
-```
-
-#### Start development server
-
-```
-# from ./ui/
-
-# using yarn
-$ yarn start
-
-# using npm
-$ npm run start
-```
-
-#### Build for production
-
-```
-# from ./ui/
-
-# using yarn
-$ yarn build
-
-# using npm
-$ npm run build
-```
 
 ### Environmental Variables
 
