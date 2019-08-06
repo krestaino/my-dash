@@ -6,9 +6,9 @@
   "description": "A developer friendly dashboard for monitoring your self-hosted services with a clean and modern UI.",
   "scripts": {
     "setup": "yarn install && yarn --cwd api/ install && yarn --cwd ui/ install",
-    "dev": "concurrently \"yarn dev:api\" \"yarn dev:ui\"",
-    "dev:api": "yarn --cwd api/ dev",
-    "dev:ui": "yarn --cwd ui/ start",
+    "start": "concurrently \"yarn start:api\" \"yarn start:ui\"",
+    "start:api": "yarn --cwd api/ start",
+    "start:ui": "yarn --cwd ui/ start",
     "build": "yarn --cwd api/ build && yarn --cwd ui/ build"
   },
   "dependencies": {

@@ -5,9 +5,9 @@
   "author": "Kevin Restaino <kevinrestaino@gmail.com>",
   "description": "API for My Dash",
   "scripts": {
-    "dev": "nodemon --watch src --exec yarn start",
+    "start": "nodemon --watch src --exec yarn serve",
     "build": "babel -d build src",
-    "start": "yarn build && node build/index.js"
+    "serve": "yarn build && node build/index.js"
   },
   "dependencies": {
     "axios": "^0.19.0",
