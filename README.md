@@ -2,7 +2,7 @@
 
 Another dashboard for your self-hosted applications.
 
-![Screenshot](screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/krestaino/my-dash/master/screenshot.png)
 
 ## Requirements
 
