@@ -1,0 +1,9 @@
+language: node_js
+node_js: '10.16.1'
+cache:
+  yarn: true
+  directories:
+    - node_modules
+install:
+  - yarn setup
+  - yarn build

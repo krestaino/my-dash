@@ -1,6 +1,8 @@
 # My Dash
 
-Another dashboard for your self-hosted applications.
+<p align="left">
+  <a href="https://travis-ci.org/krestaino/my-dash"><img src="https://travis-ci.org/krestaino/my-dash.svg?branch=master" alt="Build Status"></a>
+</p>
 
 ![Screenshot](https://raw.githubusercontent.com/krestaino/my-dash/master/screenshot.png)
 
