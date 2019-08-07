@@ -4,30 +4,66 @@ Another dashboard for your self-hosted applications.
 
 ![Screenshot](screenshot.png)
 
+## Requirements
+
+- Node 10.x
+- Yarn 1.x
+
 ## Quick Start
 
-**Install API and UI dependencies**
+### Environmental Variables
+
+First, create an `.env` file at the root of the project. Follow the template file at [.env.template](.env.template) as an example.
+
+### Development
+
+**Install dependencies**
 
 ```
 $ yarn setup
 ```
 
-**Start API and UI development servers**
+**Start development servers**
 
 ```
 $ yarn start
 ```
 
-**Build API and UI for production**
+### Production
+
+**Install dependencies**
 
 ```
-$ yarn build
+$ yarn setup
 ```
 
-**Serve API for production**
+**Serve API and UI**
 
 ```
 $ yarn serve
+```
+
+**Note:** The API listens on http://localhost:3000 and the UI listens on http://localhost:4000. This is true for both development and production. Feel free to change these in the `.env` file.
+
+## Docker
+
+**Build and serve the API and UI**
+
+```
+$ docker-compose up -d
+
+# or
+$ yarn docker
+```
+
+**Rebuild and update the container after code changes**
+
+```
+$ docker-compose build --no-cache my-dash
+$ docker-compose up -d
+
+# or
+$ yarn docker:build
 ```
 
 ## API
@@ -36,9 +72,7 @@ The API fetches data and contains all the credentials to the various services yo
 
 ### Environmental Variables
 
-Create an `.env` file at the root of the [api](api) folder. Follow the template file at [api/.env.template](api/.env.template) as an example.
-
-#### `API_KEY`
+**`API_KEY`**
 
 This can be anything you want. The key is used by the UI as a form of authentication. Each request to the API contains this key as a parameter.
 
@@ -46,7 +80,7 @@ Upon first load of the UI, you will be prompted to enter this key. It is stored 
 
 If the API rejects the key, the UI will automatically delete the invalid key in `localStorage` and ask you to reauthenticate.
 
-#### `UI_ORIGIN`
+**`UI_ORIGIN`**
 
 `CORS` is also enabled on the API. For local development, this is `http://localhost:3000`, unless you changed the port number. For production environments, remember to set the correct origin as `http://localhost:3000` is probably not what you want.
 
@@ -56,11 +90,9 @@ The UI fetches data gathered by the API and renders the content. Styling is all 
 
 ### Environmental Variables
 
-Create an `.env` file at the root of the [ui](ui) folder. Follow the template file at [ui/.env.template](ui/.env.template) as an example.
+`REACT_APP_API_URL`
 
-#### `REACT_APP_API_URL`
-
-The URL of your API server. For local development, this is `http://localhost:4000`, unless you changed `API_PORT` in the API `.env` file. For production environments, remember to set the correct URL as `http://localhost:4000` is probably not what you want.
+The URL of your API server. For local development, this is `http://localhost:4000`, unless you changed `API_PORT` in the `.env` file. For production environments, remember to set the correct URL as `http://localhost:4000` is probably not what you want.
 
 ## Adding your own services
 
@@ -68,7 +100,7 @@ I recommend you check out the two folders [api/src/routes](api/src/routes) and [
 
 But as a _very_ brief walk-through:
 
-1. Add endpoints and/or credentials to the corresponding `.env` file.
+1. Add endpoints and/or credentials to the `.env` file.
 2. Create a new route in [api/src/routes](api/src/routes) with the name of your new service. All files in the routes folder are automatically imported.
 3. Create a new component in the [ui/src/components/services](ui/src/components/services) folder and import it into the main app entry point [ui/src/index.js](ui/src/index.js).
 4. Render the data however you want.

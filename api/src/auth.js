@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
   if (token !== process.env.API_KEY) {
     permit.fail(res);
-    return next('error: invalid API_KEY');
+    return next('API: Invalid API_KEY');
   }
 
   next();

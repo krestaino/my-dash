@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
@@ -12,4 +10,4 @@ app.use(cors({ origin: process.env.UI_ORIGIN }));
 
 require('./routes.js')(app, authenticate, axios);
 
-app.listen(port, () => console.log('info: listening on port ' + port));
+app.listen(port, () => console.log('API: Accepting connections at http://localhost:' + port));

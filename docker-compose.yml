@@ -1,0 +1,12 @@
+version: '3'
+services:
+  my-dash:
+    image: node:10.16.1-jessie-slim
+    build: .
+    container_name: my-dash
+    working_dir: /usr/my-dash
+    command: yarn serve
+    ports:
+      - '${API_PORT}:${API_PORT}'
+      - '${UI_PORT}:${UI_PORT}'
+    restart: always

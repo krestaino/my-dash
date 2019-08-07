@@ -10,8 +10,6 @@ import Plex from './components/services/Plex.js';
 import Auth from './components/Auth.js';
 import ThemeToggle from './components/ThemeToggle.js';
 
-require('dotenv').config();
-
 class App extends React.Component {
   render() {
     if (!window.localStorage.getItem('API_KEY')) {

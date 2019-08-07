@@ -1,25 +1,33 @@
 {
   "name": "my-dash",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "license": "MIT",
   "author": "Kevin Restaino <kevinrestaino@gmail.com>",
   "description": "A developer friendly dashboard for monitoring your self-hosted services with a clean and modern UI.",
   "scripts": {
-    "setup": "yarn install && yarn --cwd api/ install && yarn --cwd ui/ install",
-    "start": "concurrently \"yarn start:api\" \"yarn start:ui\"",
+    "setup": "yarn install && yarn setup:api && yarn setup:ui",
+    "setup:api": "yarn --cwd api/ install",
+    "setup:ui": "yarn --cwd ui/ install",
+    "start": "dotenv -e .env concurrently \"yarn start:api\" \"yarn start:ui\"",
     "start:api": "yarn --cwd api/ start",
     "start:ui": "yarn --cwd ui/ start",
-    "build": "yarn --cwd api/ build && yarn --cwd ui/ build",
-    "serve": "yarn --cwd api/ serve"
+    "build": "dotenv -e .env concurrently \"yarn build:api\" \"yarn build:ui\"",
+    "build:api": "yarn --cwd api/ build",
+    "build:ui": "yarn --cwd ui/ build",
+    "serve": "dotenv -e .env concurrently \"yarn serve:api\" \"yarn serve:ui\"",
+    "serve:api": "yarn --cwd api/ serve",
+    "serve:ui": "yarn --cwd ui/ serve",
+    "docker": "docker-compose up -d",
+    "docker:build": "docker-compose build --no-cache my-dash && yarn docker"
   },
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^4.1.1"
   },
   "devDependencies": {
-    "copyfiles": "^2.1.1",
-    "husky": "^1.3.1",
-    "lint-staged": "^8.1.0",
-    "prettier": "^1.15.3"
+    "dotenv-cli": "^2.0.1",
+    "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
+    "prettier": "^1.18.2"
   },
   "husky": {
     "hooks": {
