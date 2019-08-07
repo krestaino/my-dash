@@ -18,7 +18,8 @@
     "serve:api": "yarn --cwd api/ serve",
     "serve:ui": "yarn --cwd ui/ serve",
     "docker": "docker-compose up -d",
-    "docker:build": "docker-compose build --no-cache my-dash && yarn docker"
+    "docker:build": "docker-compose build --no-cache my-dash && yarn docker",
+    "test": "node -v"
   },
   "dependencies": {
     "concurrently": "^4.1.1"
