@@ -8,6 +8,12 @@ export default class NetdataInstance extends Component {
     colWidth: 0,
     monitors: [
       {
+        name: 'Usage',
+        family: 'CPU',
+        endpoint: 'system.cpu',
+        value: null
+      },
+      {
         name: 'Usage (10min)',
         family: 'CPU',
         endpoint: 'system.cpu&alarm=10min_cpu_usage',
@@ -141,12 +147,6 @@ export default class NetdataInstance extends Component {
           <div className="hidden target" data-target={id}>
             <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
               <div className="mb-2 text-sm">CPU</div>
-              <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full">
-                <span>Usage</span>
-                <span className={this.colorValue({ value: this.average(data.cpu), warning: 75, critical: 85 })}>
-                  {this.average(data.cpu)}%
-                </span>
-              </div>
               {CPU.map(({ name, endpoint }) => (
                 <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
                   <span>{name}</span>
@@ -196,7 +196,7 @@ export default class NetdataInstance extends Component {
                       >
                         <span>{name}</span>
                         <span className={this.colorValue({ value: this.state[endpoint], warning: 80, critical: 90 })}>
-                          {this.state[endpoint]}
+                          {this.state[endpoint]}%
                         </span>
                       </div>
                     )
