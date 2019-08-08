@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AreaSeries, LineSeries, makeWidthFlexible, XYPlot } from 'react-vis';
+import { AreaSeries, LineSeries, XYPlot } from 'react-vis';
 import 'react-vis/dist/style.css';
 
 import { ReactComponent as IconChevronDown } from '../../assets/svg/chevron-down-solid.svg';
