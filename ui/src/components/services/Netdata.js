@@ -25,21 +25,21 @@ export default class Netdata extends Component {
   }
 
   render() {
-    const { netdataDo, netdataHome } = this.state;
+    const instances = [
+      { data: this.state.netdataDo, url: process.env.REACT_APP_NETDATA_DO_URL, id: 'do' },
+      { data: this.state.netdataHome, url: process.env.REACT_APP_NETDATA_HOME_URL, id: 'home' }
+    ];
 
     return (
       <div className="lg:w-1/5 px-4">
         <h2>Netdata</h2>
         <ul>
-          {!netdataDo ? (
-            <Loading response={netdataDo} />
-          ) : (
-            <Instance data={netdataDo} url={process.env.REACT_APP_NETDATA_DO_URL} id="do" />
-          )}
-          {!netdataHome ? (
-            <Loading response={netdataHome} />
-          ) : (
-            <Instance data={netdataHome} url={process.env.REACT_APP_NETDATA_HOME_URL} id="home" />
+          {instances.map(instance =>
+            !instance.data ? (
+              <Loading response={instance.data} />
+            ) : (
+              <Instance data={instance.data} url={instance.url} id={instance.id} />
+            )
           )}
         </ul>
       </div>
