@@ -42,6 +42,12 @@ $ yarn start
 $ yarn setup
 ```
 
+**Build API and UI**
+
+```
+$ yarn build
+```
+
 **Serve API and UI**
 
 ```
