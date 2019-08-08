@@ -4,11 +4,6 @@ import axios from 'axios';
 import { ReactComponent as IconChevronDown } from '../../assets/svg/chevron-down-solid.svg';
 
 export default class NetdataInstance extends Component {
-  constructor(props) {
-    super(props);
-    this.colWidthRef = React.createRef();
-  }
-
   state = {
     colWidth: 0,
     monitors: [
@@ -22,12 +17,6 @@ export default class NetdataInstance extends Component {
         name: 'Used',
         family: 'RAM',
         endpoint: 'system.ram&alarm=ram_in_use',
-        value: null
-      },
-      {
-        name: 'Free',
-        family: 'RAM',
-        endpoint: 'mem.available&alarm=ram_available',
         value: null
       },
       {
@@ -46,18 +35,6 @@ export default class NetdataInstance extends Component {
         name: '/media/vault',
         family: 'Disks',
         endpoint: 'disk_space._media_vault&alarm=disk_space_usage',
-        value: null
-      },
-      {
-        name: 'Sent',
-        family: 'TCP',
-        endpoint: 'ipv4.tcphandshake&alarm=1m_ipv4_tcp_resets_sent',
-        value: null
-      },
-      {
-        name: 'Received',
-        family: 'TCP',
-        endpoint: 'ipv4.tcphandshake&alarm=10s_ipv4_tcp_resets_received',
         value: null
       }
     ]
@@ -80,13 +57,23 @@ export default class NetdataInstance extends Component {
   getData() {
     this.state.monitors.map(async monitor => {
       let { endpoint, value } = monitor;
-      const test = await axios.get(this.props.url + '/api/v1/badge.svg?chart=' + endpoint);
+      const svg = await axios.get(this.props.url + '/api/v1/badge.svg?chart=' + endpoint + '&units=null');
       const temp = document.createElement('div');
-      temp.innerHTML = test.data;
+      temp.innerHTML = svg.data;
       const html = temp.firstChild;
-      value = html.querySelector('.bdge-lbl-val[fill]').innerHTML;
+      value = html.querySelector('.bdge-lbl-val').innerHTML;
       this.setState({ [endpoint]: value });
     });
+  }
+
+  colorValue({ value, warning, critical }) {
+    if (value >= critical) {
+      return 'text-red-600';
+    } else if (value >= warning) {
+      return 'text-yellow-600';
+    } else {
+      return 'text-green-600';
+    }
   }
 
   areaData(data) {
@@ -128,7 +115,6 @@ export default class NetdataInstance extends Component {
     const RAM = this.state.monitors.filter(({ family }) => family === 'RAM');
     const Processes = this.state.monitors.filter(({ family }) => family === 'Processes');
     const Disks = this.state.monitors.filter(({ family }) => family === 'Disks');
-    const TCP = this.state.monitors.filter(({ family }) => family === 'TCP');
 
     return (
       <li className="box mb-8" key={data.info.uid}>
@@ -157,12 +143,16 @@ export default class NetdataInstance extends Component {
               <div className="mb-2 text-sm">CPU</div>
               <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full">
                 <span>Usage</span>
-                <span className={this.average(data.cpu) > 75 ? 'text-red-600' : ''}>{this.average(data.cpu)}%</span>
+                <span className={this.colorValue({ value: this.average(data.cpu), warning: 75, critical: 85 })}>
+                  {this.average(data.cpu)}%
+                </span>
               </div>
               {CPU.map(({ name, endpoint }) => (
                 <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
                   <span>{name}</span>
-                  <span>{this.state[endpoint]}</span>
+                  <span className={this.colorValue({ value: this.state[endpoint], warning: 75, critical: 85 })}>
+                    {this.state[endpoint]}%
+                  </span>
                 </div>
               ))}
             </div>
@@ -171,7 +161,15 @@ export default class NetdataInstance extends Component {
               {RAM.map(({ name, endpoint }) => (
                 <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
                   <span>{name}</span>
-                  <span>{this.state[endpoint]}</span>
+                  <span
+                    className={this.colorValue({
+                      value: this.state[endpoint],
+                      warning: 80,
+                      critical: 90
+                    })}
+                  >
+                    {this.state[endpoint]}%
+                  </span>
                 </div>
               ))}
             </div>
@@ -181,7 +179,9 @@ export default class NetdataInstance extends Component {
                 {Processes.map(({ name, endpoint }) => (
                   <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
                     <span>{name}</span>
-                    <span>{this.state[endpoint]}</span>
+                    <span className={this.colorValue({ value: this.state[endpoint], warning: 25000, critical: 28000 })}>
+                      {this.state[endpoint]}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -195,19 +195,12 @@ export default class NetdataInstance extends Component {
                         key={endpoint}
                       >
                         <span>{name}</span>
-                        <span>{this.state[endpoint]}</span>
+                        <span className={this.colorValue({ value: this.state[endpoint], warning: 80, critical: 90 })}>
+                          {this.state[endpoint]}
+                        </span>
                       </div>
                     )
                 )}
-              </div>
-              <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
-                <div className="mb-2 text-sm">TCP</div>
-                {TCP.map(({ name, endpoint }) => (
-                  <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
-                    <span>{name}</span>
-                    <span>{this.state[endpoint]}</span>
-                  </div>
-                ))}
               </div>
             </div>
           </div>
