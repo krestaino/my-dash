@@ -22,8 +22,7 @@
     "test": "node -v"
   },
   "dependencies": {
-    "concurrently": "^4.1.1",
-    "react-vis": "^1.11.7"
+    "concurrently": "^4.1.1"
   },
   "devDependencies": {
     "dotenv-cli": "^2.0.1",
