@@ -5,7 +5,7 @@
   "author": "Kevin Restaino <kevinrestaino@gmail.com>",
   "description": "API for My Dash",
   "scripts": {
-    "start": "nodemon --watch src --exec yarn serve",
+    "start": "nodemon --watch src --exec 'yarn build & yarn serve'",
     "build": "babel -d build src",
     "serve": "node build/index.js"
   },

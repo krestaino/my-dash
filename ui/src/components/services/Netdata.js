@@ -51,44 +51,56 @@ export default class Netdata extends Component {
 class NetdataInstance extends Component {
   componentDidMount() {
     const { id } = this.props;
+    const trigger = document.querySelector(`button[data-trigger='${id}']`);
+    const target = document.querySelector(`[data-target='${id}']`);
 
-    document.querySelector(`button[data-trigger='${id}']`).addEventListener('click', () => {
-      document.querySelector(`[data-target='${id}']`).classList.toggle('hidden');
+    trigger.addEventListener('click', () => {
+      target.classList.toggle('hidden');
     });
+  }
+
+  average(points) {
+    let total = 0;
+    for (let i = 0; i < points.length; i++) {
+      total += points[i];
+    }
+    return (total / points.length).toFixed(1);
   }
 
   render() {
     const { data, id, url } = this.props;
 
     return (
-      <li className="box mb-8" key={data.uid}>
+      <li className="box mb-8" key={data.info.uid}>
         <a className="hover:underline" href={url} rel="noopener noreferrer" target="_blank">
-          {data.mirrored_hosts[0]}
+          {data.info.mirrored_hosts[0]}
         </a>
         <div className="text-gray-600 dark:text-gray-500 text-xs">
-          {data.os_name} {data.os_version}
+          {data.info.os_name} {data.info.os_version}
         </div>
         <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
           <div className="mb-2 text-sm">Alarms</div>
           <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full">
             <span>Critical</span>
-            <span className={data.alarms.critical && 'text-red-600'}>{data.alarms.critical}</span>
+            <span className={data.info.alarms.critical && 'text-red-600'}>{data.info.alarms.critical}</span>
           </div>
           <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full">
             <span>Warning</span>
-            <span className={data.alarms.warning && 'text-yellow-600'}>{data.alarms.warning}</span>
+            <span className={data.info.alarms.warning && 'text-yellow-600'}>{data.info.alarms.warning}</span>
           </div>
           <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full">
             <span>Normal</span>
-            <span className="text-green-600">{data.alarms.normal}</span>
+            <span className="text-green-600">{data.info.alarms.normal}</span>
           </div>
-          <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4 hidden target" data-target={id}>
-            <div>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus lectus id velit scelerisque, vel
-              mattis velit fringilla. Integer et porttitor sem. Donec nulla neque, ullamcorper at dui ac, iaculis
-              malesuada lacus. In bibendum non purus et molestie. Pellentesque convallis sollicitudin elit, ac mattis
-              lorem volutpat vel. Aenean id lacus quis ex laoreet fringilla eu quis nunc. Vivamus non accumsan felis, ac
-              ullamcorper nisl.
+          <div className="hidden target" data-target={id}>
+            <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
+              <div className="mb-2 text-sm">Usage</div>
+              <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full">
+                <span>CPU</span>
+                <span className={this.average(data.cpu.result) > 75 && 'text-red-600'}>
+                  {this.average(data.cpu.result)}%
+                </span>
+              </div>
             </div>
           </div>
           <div className="border-t dark:border-gray-700 mt-4 -m-4 cursor-pointer">
