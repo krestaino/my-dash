@@ -9,4 +9,4 @@ const server = http.createServer((request, response) => {
   });
 });
 
-server.listen(PORT, () => console.log('UI: Accepting connections at http://localhost:' + PORT));
+server.listen(PORT, () => console.log('UI:  Accepting connections at http://localhost:' + PORT));
