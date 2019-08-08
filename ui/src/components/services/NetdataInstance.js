@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { AreaSeries, LineSeries, XYPlot } from 'react-vis';
-import 'react-vis/dist/style.css';
+import axios from 'axios';
 
 import { ReactComponent as IconChevronDown } from '../../assets/svg/chevron-down-solid.svg';
 
@@ -11,7 +10,57 @@ export default class NetdataInstance extends Component {
   }
 
   state = {
-    colWidth: 0
+    colWidth: 0,
+    monitors: [
+      {
+        name: 'Usage (10min)',
+        family: 'CPU',
+        endpoint: 'system.cpu&alarm=10min_cpu_usage',
+        value: null
+      },
+      {
+        name: 'Used',
+        family: 'RAM',
+        endpoint: 'system.ram&alarm=ram_in_use',
+        value: null
+      },
+      {
+        name: 'Free',
+        family: 'RAM',
+        endpoint: 'mem.available&alarm=ram_available',
+        value: null
+      },
+      {
+        name: 'Total',
+        family: 'Processes',
+        endpoint: 'system.active_processes&alarm=active_processes_limit',
+        value: null
+      },
+      {
+        name: '/',
+        family: 'Disks',
+        endpoint: 'disk_space._&alarm=disk_space_usage',
+        value: null
+      },
+      {
+        name: '/media/vault',
+        family: 'Disks',
+        endpoint: 'disk_space._media_vault&alarm=disk_space_usage',
+        value: null
+      },
+      {
+        name: 'Sent',
+        family: 'TCP',
+        endpoint: 'ipv4.tcphandshake&alarm=1m_ipv4_tcp_resets_sent',
+        value: null
+      },
+      {
+        name: 'Received',
+        family: 'TCP',
+        endpoint: 'ipv4.tcphandshake&alarm=10s_ipv4_tcp_resets_received',
+        value: null
+      }
+    ]
   };
 
   componentDidMount() {
@@ -20,12 +69,24 @@ export default class NetdataInstance extends Component {
     const target = document.querySelector(`[data-target='${id}']`);
 
     trigger.addEventListener('click', () => target.classList.toggle('hidden'));
-    window.addEventListener('resize', () => this.setColWidth());
-    this.setColWidth();
+
+    this.getData();
+
+    setInterval(() => {
+      this.getData();
+    }, 2000);
   }
 
-  setColWidth() {
-    this.setState({ colWidth: this.colWidthRef.current.offsetWidth });
+  getData() {
+    this.state.monitors.map(async monitor => {
+      let { endpoint, value } = monitor;
+      const test = await axios.get(this.props.url + '/api/v1/badge.svg?chart=' + endpoint);
+      const temp = document.createElement('div');
+      temp.innerHTML = test.data;
+      const html = temp.firstChild;
+      value = html.querySelector('.bdge-lbl-val[fill]').innerHTML;
+      this.setState({ [endpoint]: value });
+    });
   }
 
   areaData(data) {
@@ -63,6 +124,12 @@ export default class NetdataInstance extends Component {
   render() {
     const { data, id, url } = this.props;
 
+    const CPU = this.state.monitors.filter(({ family }) => family === 'CPU');
+    const RAM = this.state.monitors.filter(({ family }) => family === 'RAM');
+    const Processes = this.state.monitors.filter(({ family }) => family === 'Processes');
+    const Disks = this.state.monitors.filter(({ family }) => family === 'Disks');
+    const TCP = this.state.monitors.filter(({ family }) => family === 'TCP');
+
     return (
       <li className="box mb-8" key={data.info.uid}>
         <a className="hover:underline" href={url} rel="noopener noreferrer" target="_blank">
@@ -87,46 +154,60 @@ export default class NetdataInstance extends Component {
           </div>
           <div className="hidden target" data-target={id}>
             <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
-              <div className="mb-2 text-sm">Usage</div>
+              <div className="mb-2 text-sm">CPU</div>
               <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full">
-                <span>CPU</span>
+                <span>Usage</span>
                 <span className={this.average(data.cpu) > 75 ? 'text-red-600' : ''}>{this.average(data.cpu)}%</span>
               </div>
-              <div className="mt-1">
-                <XYPlot height={30} margin={0} yDomain={[0, 100]} width={this.state.colWidth}>
-                  <LineSeries data={this.lineData(data.cpu)} curve={'curveMonotoneX'} color="#4299e1" strokeWidth={1} />
-                </XYPlot>
-              </div>
-              <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full mt-2">
-                <span>RAM</span>
-                <span>
-                  {data.ramUsage[0].toLocaleString(undefined, {
-                    maximumFractionDigits: 1
-                  })}
-                  <span>%</span>
-                </span>
-              </div>
-              <div className="mt-1">
-                <XYPlot height={30} margin={0} width={this.state.colWidth}>
-                  <AreaSeries color="#38A169" curve="curveNatural" data={this.areaData(data.ram.result.data).cached} />
-                  <AreaSeries color="#3182CE" curve="curveNatural" data={this.areaData(data.ram.result.data).used} />
-                  <AreaSeries color="#D53F8C" curve="curveNatural" data={this.areaData(data.ram.result.data).buffers} />
-                  <AreaSeries color="#D69E2E" curve="curveNatural" data={this.areaData(data.ram.result.data).free} />
-                </XYPlot>
-                <div className="text-gray-600 dark:text-gray-500 text-xs flex flex-wrap justify-between mt-1">
-                  <span className="mr-2">
-                    Free <span className="dot bg-yellow-700"></span>
-                  </span>
-                  <span className="mr-2">
-                    Used <span className="dot bg-blue-700"></span>
-                  </span>
-                  <span className="mr-2">
-                    Cached <span className="dot bg-green-700"></span>
-                  </span>
-                  <span>
-                    Buffers <span className="dot bg-pink-700"></span>
-                  </span>
+              {CPU.map(({ name, endpoint }) => (
+                <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
+                  <span>{name}</span>
+                  <span>{this.state[endpoint]}</span>
                 </div>
+              ))}
+            </div>
+            <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
+              <div className="mb-2 text-sm">RAM</div>
+              {RAM.map(({ name, endpoint }) => (
+                <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
+                  <span>{name}</span>
+                  <span>{this.state[endpoint]}</span>
+                </div>
+              ))}
+            </div>
+            <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
+              <div>
+                <div className="mb-2 text-sm">Processes</div>
+                {Processes.map(({ name, endpoint }) => (
+                  <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
+                    <span>{name}</span>
+                    <span>{this.state[endpoint]}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
+                <div className="mb-2 text-sm">Disks</div>
+                {Disks.map(
+                  ({ name, endpoint }) =>
+                    this.state[endpoint] !== '-' && (
+                      <div
+                        className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full"
+                        key={endpoint}
+                      >
+                        <span>{name}</span>
+                        <span>{this.state[endpoint]}</span>
+                      </div>
+                    )
+                )}
+              </div>
+              <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
+                <div className="mb-2 text-sm">TCP</div>
+                {TCP.map(({ name, endpoint }) => (
+                  <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full" key={endpoint}>
+                    <span>{name}</span>
+                    <span>{this.state[endpoint]}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

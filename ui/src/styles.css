@@ -19,6 +19,11 @@ body {
   font-family: 'Ubuntu', sans-serif;
 }
 
+#root {
+  @apply mx-auto;
+  max-width: 1440px;
+}
+
 .box {
   @apply bg-white p-4 border shadow-md rounded w-full overflow-hidden;
 }
