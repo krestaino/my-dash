@@ -6,7 +6,8 @@
   "description": "API for My Dash",
   "scripts": {
     "start": "nodemon --watch src --exec 'yarn build && yarn serve'",
-    "build": "babel -d build src",
+    "clean": "node clean.js",
+    "build": "yarn clean && babel -d build src",
     "serve": "node build/index.js"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
-    "@babel/preset-env": "^7.5.5"
+    "@babel/preset-env": "^7.5.5",
+    "rimraf": "^2.6.3"
   }
 }
