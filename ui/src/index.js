@@ -23,7 +23,7 @@ class App extends React.Component {
     }
 
     return (
-      <div className="container flex flex-col lg:flex-row max-w-7xl mx-auto text-sm xl:text-base pt-8">
+      <div className="container flex flex-col lg:flex-row max-w-full mx-auto text-sm xl:text-base pt-8">
         <UptimeRobot />
         <Unifi />
         <Netdata />

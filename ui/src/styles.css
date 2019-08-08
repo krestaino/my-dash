@@ -63,6 +63,10 @@ input::placeholder {
   transform: rotate(180deg);
 }
 
+.dot {
+  @apply w-2 h-2 inline-block rounded-full;
+}
+
 .loader {
   border-top: 0.25rem solid rgba(0, 0, 0, 0.1);
   border-right: 0.25rem solid rgba(0, 0, 0, 0.1);
