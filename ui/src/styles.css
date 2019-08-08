@@ -11,12 +11,12 @@
 */
 
 @font-face {
-  font-family: "Ubuntu";
-  src: url("/Ubuntu-Regular.woff2") format("woff2");
+  font-family: 'Ubuntu';
+  src: url('/Ubuntu-Regular.woff2') format('woff2');
 }
 
 body {
-  font-family: "Ubuntu", sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .box {
@@ -36,11 +36,11 @@ h1 {
   @apply text-sm;
 }
 
-.mode-dark input[type="text"]:focus {
+.mode-dark input[type='text']:focus {
   @apply border-gray-300;
 }
 
-input[type="text"]:focus {
+input[type='text']:focus {
   @apply border-gray-600;
 }
 
@@ -57,6 +57,10 @@ input::placeholder {
   border-radius: 50%;
   width: 1.75rem;
   height: 1.75rem;
+}
+
+.target:not(.hidden) + div svg {
+  transform: rotate(180deg);
 }
 
 .loader {
