@@ -8,7 +8,6 @@ import Seafile from './components/services/Seafile.js';
 import Plex from './components/services/Plex.js';
 
 import Auth from './components/Auth.js';
-import ThemeToggle from './components/ThemeToggle.js';
 
 class App extends React.Component {
   render() {
