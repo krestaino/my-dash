@@ -5,14 +5,27 @@ import 'react-vis/dist/style.css';
 import { ReactComponent as IconChevronDown } from '../../assets/svg/chevron-down-solid.svg';
 
 export default class NetdataInstance extends Component {
+  constructor(props) {
+    super(props);
+    this.colWidthRef = React.createRef();
+  }
+
+  state = {
+    colWidth: 0
+  };
+
   componentDidMount() {
     const { id } = this.props;
     const trigger = document.querySelector(`button[data-trigger='${id}']`);
     const target = document.querySelector(`[data-target='${id}']`);
 
-    trigger.addEventListener('click', () => {
-      target.classList.toggle('hidden');
-    });
+    trigger.addEventListener('click', () => target.classList.toggle('hidden'));
+    window.addEventListener('resize', () => this.setColWidth());
+    this.setColWidth();
+  }
+
+  setColWidth() {
+    this.setState({ colWidth: this.colWidthRef.current.offsetWidth });
   }
 
   areaData(data) {
@@ -33,7 +46,6 @@ export default class NetdataInstance extends Component {
   lineData(data) {
     let arr = [];
     data.reverse().forEach((point, index) => arr.push({ x: index, y: point }));
-    console.log(arr);
     return arr;
   }
 
@@ -50,14 +62,13 @@ export default class NetdataInstance extends Component {
 
   render() {
     const { data, id, url } = this.props;
-    const FlexibleXYPlot = makeWidthFlexible(XYPlot);
 
     return (
       <li className="box mb-8" key={data.info.uid}>
         <a className="hover:underline" href={url} rel="noopener noreferrer" target="_blank">
           {data.info.mirrored_hosts[0]}
         </a>
-        <div className="text-gray-600 dark:text-gray-500 text-xs">
+        <div className="text-gray-600 dark:text-gray-500 text-xs" ref={this.colWidthRef}>
           {data.info.os_name} {data.info.os_version}
         </div>
         <div className="border-t dark:border-gray-700 mt-4 -m-4 p-4">
@@ -82,9 +93,9 @@ export default class NetdataInstance extends Component {
                 <span className={this.average(data.cpu) > 75 ? 'text-red-600' : ''}>{this.average(data.cpu)}%</span>
               </div>
               <div className="mt-1">
-                <FlexibleXYPlot height={30} margin={0} yDomain={[0, 100]}>
+                <XYPlot height={30} margin={0} yDomain={[0, 100]} width={this.state.colWidth}>
                   <LineSeries data={this.lineData(data.cpu)} curve={'curveMonotoneX'} color="#4299e1" strokeWidth={1} />
-                </FlexibleXYPlot>
+                </XYPlot>
               </div>
               <div className="text-gray-600 dark:text-gray-500 text-sm justify-between flex w-full mt-2">
                 <span>RAM</span>
@@ -96,12 +107,12 @@ export default class NetdataInstance extends Component {
                 </span>
               </div>
               <div className="mt-1">
-                <FlexibleXYPlot height={30} margin={0}>
+                <XYPlot height={30} margin={0} width={this.state.colWidth}>
                   <AreaSeries color="#38A169" curve="curveNatural" data={this.areaData(data.ram.result.data).cached} />
                   <AreaSeries color="#3182CE" curve="curveNatural" data={this.areaData(data.ram.result.data).used} />
                   <AreaSeries color="#D53F8C" curve="curveNatural" data={this.areaData(data.ram.result.data).buffers} />
                   <AreaSeries color="#D69E2E" curve="curveNatural" data={this.areaData(data.ram.result.data).free} />
-                </FlexibleXYPlot>
+                </XYPlot>
                 <div className="text-gray-600 dark:text-gray-500 text-xs flex flex-wrap justify-between mt-1">
                   <span className="mr-2">
                     Free <span className="dot bg-yellow-700"></span>
@@ -125,7 +136,11 @@ export default class NetdataInstance extends Component {
               data-trigger={id}
               title="Expand"
             >
-              <span>More info</span>
+              <span>
+                <span className="more">More</span>
+                <span className="less">Less</span>
+                <span> info</span>
+              </span>
               <IconChevronDown className="w-3" />
             </button>
           </div>

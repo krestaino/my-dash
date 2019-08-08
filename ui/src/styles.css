@@ -63,6 +63,14 @@ input::placeholder {
   transform: rotate(180deg);
 }
 
+.target:not(.hidden) + div .more {
+  @apply hidden;
+}
+
+.target.hidden + div .less {
+  @apply hidden;
+}
+
 .dot {
   @apply w-2 h-2 inline-block rounded-full;
 }
