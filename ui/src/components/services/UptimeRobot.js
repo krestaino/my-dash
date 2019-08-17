@@ -6,6 +6,13 @@ import Loading from '../Loading.js';
 
 import { ReactComponent as IconError } from '../../assets/svg/exclamation-triangle-solid.svg';
 import { ReactComponent as IconSuccess } from '../../assets/svg/check-circle-solid.svg';
+import { ReactComponent as IconPaused } from '../../assets/svg/circle-solid.svg';
+
+const constants = {
+  STATUS_DOWN: 9,
+  STATUS_UP: 2,
+  STATUS_PAUSED: 0
+};
 
 export default class UptimeRobot extends Component {
   state = {
@@ -25,6 +32,26 @@ export default class UptimeRobot extends Component {
     }, 30000);
   }
 
+  getStatusIcon(status) {
+    if (status === constants.STATUS_UP) {
+      return <IconSuccess className="w-4" />;
+    } else if (status === constants.STATUS_DOWN) {
+      return <IconError className="w-4" />;
+    } else {
+      return <IconPaused className="w-4" />;
+    }
+  }
+
+  getStatusText(status) {
+    if (status === constants.STATUS_UP) {
+      return 'Up';
+    } else if (status === constants.STATUS_DOWN) {
+      return 'Down';
+    } else {
+      return 'Paused';
+    }
+  }
+
   render() {
     const { uptimeRobot } = this.state;
 
@@ -35,25 +62,22 @@ export default class UptimeRobot extends Component {
           <Loading response={uptimeRobot} />
         ) : (
           <ul className="box mb-8 flex lg:flex-col flex-wrap">
-            {uptimeRobot.monitors.map(monitor => {
+            {uptimeRobot.monitors.map(({ friendly_name, status, url }) => {
               return (
-                <li className="flex items-center w-1/2 lg:w-full mb-1" key={monitor.friendly_name}>
+                <li className="flex items-center w-1/2 lg:w-full mb-1" key={friendly_name}>
                   <div
                     className={classNames({
                       'mr-2': true,
-                      'text-green-600': monitor.status === 2,
-                      'text-red-600': monitor.status !== 2
+                      'text-gray-600': status === constants.STATUS_PAUSED,
+                      'text-green-600': status === constants.STATUS_UP,
+                      'text-red-600': status === constants.STATUS_DOWN
                     })}
+                    title={this.getStatusText(status)}
                   >
-                    {monitor.status === 2 ? <IconSuccess className="w-4" /> : <IconError className="w-4" />}
+                    {this.getStatusIcon(status)}
                   </div>
-                  <a
-                    className="hover:underline"
-                    href={`https://uptimerobot.com/dashboard#${monitor.id}`}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {monitor.friendly_name}
+                  <a className="hover:underline" href={url} rel="noopener noreferrer" target="_blank">
+                    {friendly_name}
                   </a>
                 </li>
               );
