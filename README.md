@@ -113,7 +113,7 @@ But as a _very_ brief walk-through:
 
 1. Add endpoints and/or credentials to the `.env` file.
 2. Create a new route in [api/src/routes](api/src/routes) with the name of your new service. All files in the routes folder are automatically imported.
-3. Create a new component in the [ui/src/components/services](ui/src/components/services) folder and import it into the main app entry point [ui/src/index.js](ui/src/index.js).
+3. Create a new component in the [ui/src/components/services](ui/src/components/services) folder and import it into the main services component at [ui/src/components/Services.js](ui/src/components/Services.js).
 4. Render the data however you want.
 
 ## FAQ

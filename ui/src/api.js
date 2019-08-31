@@ -20,6 +20,6 @@ export default async endpoint => {
     if (error.response.status === 401) {
       clearLocalStorage();
     }
-    return false;
+    throw error;
   }
 };
