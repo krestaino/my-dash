@@ -8,12 +8,10 @@ export default class Error extends PureComponent {
     error: PropTypes.string
   };
 
-  render() {
-    return (
-      <div className="text-red-600">
-        <IconError className="mx-auto mt-8 w-4" />
-        <p className="text-xs text-center mt-4 px-4">{this.props.error}</p>
-      </div>
-    );
-  }
+  render = () => (
+    <div className="text-red-600">
+      <IconError className="mx-auto mt-8 w-4" />
+      <p className="text-xs text-center mt-4 px-4">{this.props.error}</p>
+    </div>
+  );
 }

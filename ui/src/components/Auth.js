@@ -15,8 +15,9 @@ export default class Auth extends Component {
     window.location.reload();
   };
 
-  render() {
-    return (
+  render = () => (
+    <div className="container mx-auto max-w-lg py-8 px-4">
+      <h1>My Dash</h1>
       <form onSubmit={this.handleSubmit}>
         <div className="box flex mt-8">
           <label className="text-gray-600 dark:text-gray-500 text-sm flex flex-1 items-center">
@@ -36,6 +37,6 @@ export default class Auth extends Component {
           />
         </div>
       </form>
-    );
-  }
+    </div>
+  );
 }

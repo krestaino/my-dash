@@ -17,7 +17,7 @@ export default class Service extends Component {
     loading: true
   };
 
-  async fetch() {
+  fetch = async () => {
     const { endpoint, successFetch } = this.props;
 
     try {
@@ -28,15 +28,15 @@ export default class Service extends Component {
     } finally {
       this.setState({ loading: false });
     }
-  }
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.fetch();
 
     setInterval(() => {
       this.fetch();
     }, this.props.refreshRate);
-  }
+  };
 
   render() {
     const { loading, error } = this.state;
