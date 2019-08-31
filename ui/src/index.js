@@ -5,7 +5,7 @@ import UptimeRobot from './components/services/UptimeRobot.js';
 import Unifi from './components/services/Unifi.js';
 import Netdata from './components/services/Netdata.js';
 import Seafile from './components/services/Seafile.js';
-import Plex from './components/services/Plex';
+import Plex from './components/services/Plex.js';
 
 import Auth from './components/Auth.js';
 import Service from './components/Service.js';
@@ -15,7 +15,10 @@ class App extends React.Component {
   state = {
     uptimeRobot: undefined,
     unifi: undefined,
-    seafile: undefined
+    netdataDo: undefined,
+    netdataHome: undefined,
+    seafile: undefined,
+    plex: undefined
   };
 
   render() {
