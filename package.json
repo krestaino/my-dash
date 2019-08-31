@@ -1,6 +1,6 @@
 {
   "name": "my-dash",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
   "author": "Kevin Restaino <kevinrestaino@gmail.com>",
   "description": "A developer friendly dashboard for monitoring your self-hosted services with a clean and modern UI.",
