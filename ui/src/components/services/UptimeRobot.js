@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
-import Service from '../Service.js';
 
 import { ReactComponent as IconError } from '../../assets/svg/exclamation-triangle-solid.svg';
 import { ReactComponent as IconSuccess } from '../../assets/svg/check-circle-solid.svg';
@@ -13,9 +12,17 @@ const constants = {
   STATUS_PAUSED: 0
 };
 
-export default class UptimeRobot extends Component {
-  state = {
-    data: []
+export default class UptimeRobot extends PureComponent {
+  static propTypes = {
+    data: PropTypes.shape({
+      monitors: PropTypes.arrayOf(
+        PropTypes.shape({
+          friendly_name: PropTypes.string,
+          status: PropTypes.number,
+          url: PropTypes.string
+        })
+      )
+    })
   };
 
   getStatusIcon = status => {
@@ -39,31 +46,25 @@ export default class UptimeRobot extends Component {
   };
 
   render = () => (
-    <Service
-      endpoint={process.env.REACT_APP_UPTIME_ROBOT_ENDPOINT}
-      refreshRate={30000}
-      successFetch={({ data }) => this.setState({ data: data.monitors })}
-    >
-      <ul className="box mb-8 flex lg:flex-col flex-wrap">
-        {this.state.data.map(({ friendly_name, status, url }) => (
-          <li className="flex items-center w-1/2 lg:w-full mb-1" key={friendly_name}>
-            <div
-              className={classNames({
-                'mr-2': true,
-                'text-gray-600': status === constants.STATUS_PAUSED,
-                'text-green-600': status === constants.STATUS_UP,
-                'text-red-600': status === constants.STATUS_DOWN
-              })}
-              title={this.getStatusText(status)}
-            >
-              {this.getStatusIcon(status)}
-            </div>
-            <a className="hover:underline" href={url} rel="noopener noreferrer" target="_blank">
-              {friendly_name}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </Service>
+    <ul className="box mb-8 flex lg:flex-col flex-wrap">
+      {this.props.data.monitors.map(({ friendly_name, status, url }) => (
+        <li className="flex items-center w-1/2 lg:w-full mb-1" key={friendly_name}>
+          <div
+            className={classNames({
+              'mr-2': true,
+              'text-gray-600': status === constants.STATUS_PAUSED,
+              'text-green-600': status === constants.STATUS_UP,
+              'text-red-600': status === constants.STATUS_DOWN
+            })}
+            title={this.getStatusText(status)}
+          >
+            {this.getStatusIcon(status)}
+          </div>
+          <a className="hover:underline" href={url} rel="noopener noreferrer" target="_blank">
+            {friendly_name}
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }

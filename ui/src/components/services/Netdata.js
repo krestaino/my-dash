@@ -4,9 +4,21 @@ import axios from 'axios';
 
 import { ReactComponent as IconChevronDown } from '../../assets/svg/chevron-down-solid.svg';
 
-export default class NetdataInstance extends Component {
+export default class Netdata extends Component {
   static propTypes = {
-    data: PropTypes.object,
+    data: PropTypes.shape({
+      info: PropTypes.shape({
+        mirrored_hosts: PropTypes.arrayOf(PropTypes.string),
+        os_name: PropTypes.string,
+        os_version: PropTypes.string,
+        alarms: PropTypes.shape({
+          critical: PropTypes.number,
+          warning: PropTypes.number,
+          normal: PropTypes.number
+        }),
+        uid: PropTypes.string
+      })
+    }),
     url: PropTypes.string
   };
 

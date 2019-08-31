@@ -1,10 +1,31 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import Service from '../Service.js';
-
-export default class Plex extends Component {
-  state = {
-    data: []
+export default class Plex extends PureComponent {
+  static propTypes = {
+    data: PropTypes.shape({
+      MediaContainer: PropTypes.shape({
+        Metadata: PropTypes.arrayOf(
+          PropTypes.shape({
+            duration: PropTypes.string,
+            grandparentTitle: PropTypes.string,
+            parentIndex: PropTypes.string,
+            Player: PropTypes.shape({
+              device: PropTypes.string,
+              platform: PropTypes.string
+            }),
+            title: PropTypes.string,
+            User: PropTypes.shape({
+              title: PropTypes.string,
+              thumb: PropTypes.string
+            }),
+            viewOffset: PropTypes.string,
+            year: PropTypes.string
+          })
+        ),
+        size: PropTypes.number
+      })
+    })
   };
 
   displayTime = millisec => {
@@ -26,22 +47,12 @@ export default class Plex extends Component {
     return `${minutes} min`;
   };
 
-  handleSuccessFetch = data => {
-    const filter = data.MediaContainer.Metadata || [];
-    this.setState({ data: filter });
-  };
-
   render = () => (
-    <Service
-      endpoint={process.env.REACT_APP_PLEX_ENDPOINT}
-      refreshRate={5000}
-      successFetch={({ data }) => this.handleSuccessFetch(data)}
-    >
-      <ul>
-        {!this.state.data.length && (
-          <li className="box text-center text-gray-600 dark:text-gray-500 text-sm mb-8">No active streams</li>
-        )}
-        {this.state.data.map((stream, index) => (
+    <ul>
+      {!this.props.data.MediaContainer.size ? (
+        <li className="box text-center text-gray-600 dark:text-gray-500 text-sm mb-8">No active streams</li>
+      ) : (
+        this.props.data.MediaContainer.Metadata.map((stream, index) => (
           <li className="box mb-8" key={index}>
             {stream.grandparentTitle ? <div>{stream.grandparentTitle}</div> : <div>{stream.title}</div>}
             <div className="text-gray-600 dark:text-gray-500 text-sm">
@@ -71,8 +82,8 @@ export default class Plex extends Component {
               />
             </div>
           </li>
-        ))}
-      </ul>
-    </Service>
+        ))
+      )}
+    </ul>
   );
 }

@@ -1,25 +1,29 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import Service from '../Service.js';
-
-export default class Unifi extends Component {
-  state = {
-    data: []
+export default class Unifi extends PureComponent {
+  static propTypes = {
+    data: PropTypes.shape({
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          subsystem: PropTypes.string,
+          num_user: PropTypes.number,
+          remote_user_num_active: PropTypes.number,
+          wan_ip: PropTypes.string,
+          'tx_bytes-r': PropTypes.number,
+          'rx_bytes-r': PropTypes.number,
+          remote_user_tx_bytes: PropTypes.number
+        })
+      )
+    })
   };
 
-  handleSuccessFetch = ({ data }) => {
-    const filter = data.filter(system => system.subsystem !== 'www');
-    this.setState({ data: filter });
-  };
+  render() {
+    const systems = this.props.data.data.filter(system => system.subsystem !== 'www');
 
-  render = () => (
-    <Service
-      endpoint={process.env.REACT_APP_UNIFI_ENDPOINT}
-      refreshRate={5000}
-      successFetch={({ data }) => this.handleSuccessFetch(data)}
-    >
+    return (
       <ul>
-        {this.state.data.map(system => (
+        {systems.map(system => (
           <li className="box mb-8 flex flex-col" key={system.subsystem}>
             <div className="justify-between flex w-full">
               <span className="uppercase">{system.subsystem}</span>
@@ -43,6 +47,6 @@ export default class Unifi extends Component {
           </li>
         ))}
       </ul>
-    </Service>
-  );
+    );
+  }
 }
