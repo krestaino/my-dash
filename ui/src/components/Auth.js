@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import api from '../api.js';
+import Loading from './Loading.js';
 
 export default class Auth extends Component {
   static propTypes = {
@@ -10,6 +11,7 @@ export default class Auth extends Component {
 
   state = {
     API_KEY: undefined,
+    loading: true,
     error: undefined
   };
 
@@ -28,19 +30,22 @@ export default class Auth extends Component {
     } catch (error) {
       window.localStorage.removeItem('API_KEY');
       this.setState({ API_KEY: undefined, error: error.toString() });
+    } finally {
+      this.setState({ loading: false });
     }
   };
 
   componentDidMount = () => {
     const API_KEY = window.localStorage.getItem('API_KEY');
-
-    if (API_KEY) {
-      this.auth(API_KEY);
-    }
+    API_KEY ? this.auth(API_KEY) : this.setState({ loading: false });
   };
 
   render() {
-    const { API_KEY, error } = this.state;
+    const { API_KEY, loading, error } = this.state;
+
+    if (loading) {
+      return <Loading />;
+    }
 
     if (!API_KEY) {
       return (
