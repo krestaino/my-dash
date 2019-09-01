@@ -11,7 +11,7 @@ export default class Auth extends Component {
 
   state = {
     API_KEY: undefined,
-    loading: true,
+    loading: undefined,
     error: undefined
   };
 
@@ -24,6 +24,7 @@ export default class Auth extends Component {
 
   auth = async API_KEY => {
     try {
+      this.setState({ loading: true });
       window.localStorage.setItem('API_KEY', API_KEY);
       await api(process.env.REACT_APP_AUTH_ENDPOINT);
       this.setState({ API_KEY });
@@ -37,7 +38,10 @@ export default class Auth extends Component {
 
   componentDidMount = () => {
     const API_KEY = window.localStorage.getItem('API_KEY');
-    API_KEY ? this.auth(API_KEY) : this.setState({ loading: false });
+
+    if (API_KEY) {
+      this.auth(API_KEY);
+    }
   };
 
   render() {
