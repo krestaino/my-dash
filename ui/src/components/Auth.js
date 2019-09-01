@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import api from '../api.js';
 
 export default class Auth extends Component {
-  inputRef = React.createRef();
+  static propTypes = {
+    children: PropTypes.element
+  };
 
   state = {
-    API_KEY: '',
-    error: ''
+    API_KEY: undefined,
+    error: undefined
   };
+
+  inputRef = React.createRef();
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -22,7 +27,7 @@ export default class Auth extends Component {
       this.setState({ API_KEY });
     } catch (error) {
       window.localStorage.removeItem('API_KEY');
-      this.setState({ API_KEY: undefined, error });
+      this.setState({ API_KEY: undefined, error: error.toString() });
     }
   };
 
@@ -35,7 +40,9 @@ export default class Auth extends Component {
   };
 
   render() {
-    if (!this.state.API_KEY) {
+    const { API_KEY, error } = this.state;
+
+    if (!API_KEY) {
       return (
         <div className="container mx-auto max-w-lg py-8 px-4">
           <h1>My Dash</h1>
@@ -56,7 +63,7 @@ export default class Auth extends Component {
                 value="Connect"
               />
             </div>
-            <div className="text-red-600 text-xs text-center mt-4 px-4">{this.state.error.toString()}</div>
+            {error && <div className="text-red-600 text-xs text-center mt-4 px-4">{error}</div>}
           </form>
         </div>
       );
