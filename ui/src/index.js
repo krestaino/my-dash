@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 
 import Auth from './components/Auth.js';
@@ -7,12 +7,12 @@ import ThemeToggle from './components/ThemeToggle.js';
 
 class App extends React.PureComponent {
   render = () => (
-    <div>
+    <Fragment>
       <ThemeToggle />
       <Auth>
         <Services />
       </Auth>
-    </div>
+    </Fragment>
   );
 }
 
