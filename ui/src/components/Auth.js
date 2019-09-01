@@ -21,8 +21,8 @@ export default class Auth extends Component {
       await api(process.env.REACT_APP_AUTH_ENDPOINT);
       this.setState({ API_KEY });
     } catch (error) {
-      this.setState({ API_KEY: undefined, error });
       window.localStorage.removeItem('API_KEY');
+      this.setState({ API_KEY: undefined, error });
     }
   };
 
