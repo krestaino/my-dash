@@ -5,21 +5,13 @@ const api = axios.create({
   responseType: 'json'
 });
 
-const clearLocalStorage = () => {
-  window.localStorage.removeItem('API_KEY');
-  window.location.reload();
-};
-
 export default async endpoint => {
   try {
-    const response = await api.get(endpoint, {
+    const { data } = await api.get(endpoint, {
       params: { API_KEY: window.localStorage.getItem('API_KEY') }
     });
-    return response.data;
+    return data;
   } catch (error) {
-    if (error.response.status === 401) {
-      clearLocalStorage();
-    }
     throw error;
   }
 };

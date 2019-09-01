@@ -9,7 +9,9 @@ class App extends React.PureComponent {
   render = () => (
     <div>
       <ThemeToggle />
-      {!window.localStorage.getItem('API_KEY') ? <Auth /> : <Services />}
+      <Auth>
+        <Services />
+      </Auth>
     </div>
   );
 }
