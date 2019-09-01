@@ -94,7 +94,7 @@ export default class Auth extends Component {
       );
     }
 
-    // If not loading and API_KEY is set, render the Services.
+    // If not loading and API_KEY is valid, render the Services.
     return this.props.children;
   }
 }
